@@ -4,37 +4,60 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Site Moved: Cognilink</title>
+
+  <!-- Do not index the old page -->
   <meta name="robots" content="noindex, follow" />
-  <link rel="canonical" href="https://ayushgupta-0108.github.io/CogniLink-AI/" />
-  <!-- Auto-redirect after 4 seconds -->
-  <meta http-equiv="refresh" content="4; url=https://ayushgupta-0108.github.io/CogniLink-AI/" />
+
+  <!-- Auto redirect after 6 seconds -->
+  <meta http-equiv="refresh" content="6; url=https://ayushgupta-0108.github.io/CogniLink-AI/" />
+
   <style>
     :root { --bg: #0f172a; --fg: #e2e8f0; --muted:#94a3b8; --accent:#38bdf8; }
-    html,body { height:100%; }
-    body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, "Apple Color Emoji", "Segoe UI Emoji"; background:var(--bg); color:var(--fg); display:grid; place-items:center; }
-    .card { max-width: 720px; padding: 2rem; border: 1px solid rgba(148,163,184,.25); border-radius: 1.25rem; box-shadow: 0 10px 30px rgba(0,0,0,.25); text-align:center; }
-    h1 { font-size: clamp(1.5rem, 2.5vw + 1rem, 2.5rem); margin:0 0 .5rem; }
-    p { margin:.25rem 0; color: var(--muted); }
-    a { color: var(--accent); text-decoration: none; border-bottom: 1px dashed currentColor; }
-    a:hover { opacity:.85; }
-    .btn { display:inline-block; margin-top:1rem; padding:.75rem 1rem; border-radius:.75rem; border:1px solid rgba(56,189,248,.35); background:rgba(56,189,248,.08); }
-    .small { font-size:.9rem; margin-top:.75rem; }
+    html,body { height:100%; margin:0; display:grid; place-items:center; background:var(--bg); color:var(--fg);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans;
+    }
+    .card { max-width: 720px; padding: 2rem; border: 1px solid rgba(148,163,184,.25);
+      border-radius: 1.25rem; box-shadow: 0 10px 30px rgba(0,0,0,.25); text-align:center;
+    }
+    h1 { margin:0 0 .5rem; }
+    p { margin:.4rem 0; color: var(--muted); }
+    a { color: var(--accent); text-decoration: none; }
+    .btn { display:inline-block; margin-top:1rem; padding:.75rem 1rem; border-radius:.75rem;
+      border:1px solid rgba(56,189,248,.35); background:rgba(56,189,248,.08);
+    }
   </style>
+
   <script>
-    // Hard redirect as a fallback if meta refresh is blocked
-    (function(){
-      var target = "https://ayushgupta-0108.github.io/CogniLink-AI/";
-      setTimeout(function(){ window.location.href = target; }, 4000);
-    })();
+    // Hard redirect fallback if meta refresh is blocked
+    var target = "https://ayushgupta-0108.github.io/CogniLink-AI/";
+    setTimeout(function(){ window.location.href = target; }, 6000);
+
+    // Countdown display
+    var seconds = 6;
+    window.addEventListener("DOMContentLoaded", function () {
+      var el = document.getElementById("countdown");
+      var timer = setInterval(function () {
+        seconds--;
+        el.textContent = seconds;
+        if (seconds <= 0) clearInterval(timer);
+      }, 1000);
+    });
   </script>
+
 </head>
 <body>
-  <main class="card" role="main">
+  <main class="card">
     <h1>Website moved to <strong>Cognilink AI</strong></h1>
-    <p>This is the older page. The new site is live here:</p>
-    <p><a class="btn" href="https://ayushgupta-0108.github.io/CogniLink-AI/">ayushgupta-0108.github.io/CogniLink-AI/</a></p>
-    <p class="small">You will be redirected automatically in a few seconds.</p>
-    <p class="small">If that does not happen, use the link above.</p>
+    <p>This page is older. The new active site is here:</p>
+
+    <p>
+      <a class="btn" href="https://ayushgupta-0108.github.io/CogniLink-AI/">
+        ayushgupta-0108.github.io/CogniLink-AI/
+      </a>
+    </p>
+
+    <p>Redirecting in <span id="countdown">6</span> seconds...</p>
+    <p>If the redirect does not happen, click the link above.</p>
   </main>
 </body>
 </html>
