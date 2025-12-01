@@ -16,7 +16,6 @@
             --accent-secondary: #1d4ed8;
             --border: rgba(148, 163, 184, 0.35);
             --shadow: rgba(0, 0, 0, 0.8);
-            --accent: #38bdf8;
         }
         * {
             margin: 0;
@@ -115,7 +114,7 @@
                 0 0 40px rgba(37, 99, 235, 0.45);
         }
 
-        /* Logo animation */
+        /* OPTION A: Logo animation */
         .hero-logo-wrapper {
             display: flex;
             justify-content: center;
@@ -439,53 +438,6 @@
             color: var(--text-secondary);
         }
 
-        /* Redirect card styles (for old domain) */
-        .card {
-            max-width: 720px;
-            padding: 2rem;
-            border: 1px solid rgba(148,163,184,.25);
-            border-radius: 1.25rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,.25);
-            text-align: center;
-            background: #020617;
-        }
-        .card h1 {
-            margin: 0 0 .5rem;
-        }
-        .card p {
-            margin: .4rem 0;
-            color: var(--text-secondary);
-        }
-        .card a {
-            color: var(--accent);
-            text-decoration: none;
-        }
-        .btn-redirect {
-            display: inline-block;
-            margin-top: 1rem;
-            padding: .75rem 1rem;
-            border-radius: .75rem;
-            border: 1px solid rgba(56,189,248,.35);
-            background: rgba(56,189,248,.08);
-        }
-
-        /* When on old host, center redirect card and hide main app */
-        html.legacy-host,
-        html.legacy-host body {
-            height: 100%;
-        }
-        html.legacy-host body {
-            display: grid;
-            place-items: center;
-            background: #020617;
-        }
-        html.legacy-host #app-root {
-            display: none;
-        }
-        html.legacy-host #moved-card[hidden] {
-            display: block;
-        }
-
         /* Responsive */
         @media (max-width: 768px) {
             .hero {
@@ -524,298 +476,218 @@
     </style>
 </head>
 <body>
-    <!-- Redirect card (shown only on old GitHub Pages host) -->
-    <main id="moved-card" class="card" hidden>
-        <h1>Website moved to <strong>Cognilink.online</strong></h1>
-        <p>This page is older. The new active site is here:</p>
-
-        <p>
-            <a id="cta-link" class="btn-redirect" href="https://cognilink.online/">
-                cognilink.online
+    <header>
+        <nav>
+            <a href="#" class="logo">
+                <img src="LogoNoBackground.png" alt="CogniLink AI Logo" />
+                CogniLink AI
             </a>
-        </p>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#architecture">Architecture</a></li>
+                <li><a href="#roadmap">Roadmap</a></li>
+                <li><a href="#demo">Current Design</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
-        <p>Redirecting in <span id="countdown">10</span> seconds...</p>
-        <p>If the redirect does not happen, click the link above.</p>
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-logo-wrapper">
+                    <div class="hero-logo">
+                        <img src="LogoNoBackground.png" alt="CogniLink AI Logo" />
+                    </div>
+                </div>
+                <h1>CogniLink AI</h1>
+                <p>One Platform. Infinite AI Power. Unlimited Creation.</p>
+
+                <div class="cta-buttons">
+                    <a href="https://ayushgupta-0108.github.io/CogniLink-AI/AuthBeta.html" class="btn btn-primary" target="_blank">
+                        Use CogniLink (Beta)
+                    </a>
+                    <a href="https://youtu.be/r5vuiROgyjY?si=EeVxsBgVLZmRPZ3Q" class="btn btn-secondary" target="_blank">
+                        Watch Demo
+                    </a>
+                    <a href="https://youtu.be/4V7IfNzi1vo?si=H736N3o9zzedyCzq" class="btn btn-secondary" target="_blank">
+                        How it works
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <div class="scroll-indicator" onclick="handleScroll()">
+            <span>Scroll to explore</span>
+            <div class="scroll-arrow">↓</div>
+        </div>
+
+        <section id="features" class="section">
+            <div class="container">
+                <h2 class="section-title">Why CogniLink AI?</h2>
+                <p style="text-align: center; color: var(--text-secondary); font-size: 1.2rem; max-width: 800px; margin: 0 auto;">
+                    Many current AI tools operate with one model at a time, which limits quality and throughput. CogniLink AI's intelligent routing allows multiple specialized AI engines to collaborate, unlocking best possible results for your daily tasks.
+                </p>
+                <p style="text-align:center; color:var(--text-secondary); font-size:1rem; max-width:720px; margin:0.5rem auto 0;">
+                    Designed for solo builders, students, and small teams who want multiple AI engines working together without juggling tabs and prompts.
+                </p>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🧠</div>
+                        <h3>Smart Request Classifier</h3>
+                        <p>Automatically divides complex tasks into specialized categories (code, image, writing, web browsing, etc.) for optimal processing by expert AI engines.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Parallel Processing</h3>
+                        <p>Dedicated “kitchens” (APIs/services) work simultaneously on different aspects of your request, improving both speed and quality.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🔄</div>
+                        <h3>Centralized Coordination</h3>
+                        <p>Variable storage system ensures seamless coordination between different AI services and clean final assembly of results.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🔧</div>
+                        <h3>Extensible Architecture</h3>
+                        <p>Easily add more AI specialties, tasks, or services to expand capabilities without rebuilding the core system.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="architecture" class="section">
+            <div class="container">
+                <div class="architecture-content">
+                    <h2 class="section-title">How It Works</h2>
+                    <p style="color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 2rem;">
+                        Like a digital waiter in a multi-cuisine restaurant — receives complex orders, splits them into smaller tickets, directs each to expert kitchens, and assembles all dishes into a perfect final meal.
+                    </p>
+                    <img
+                        src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDgwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjMTExODI3Ii8+Cjx0ZXh0IHg9IjQwMCIgeT0iMjAwIiBmaWxsPSIjOTRhM2I4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxOCI+QXJjaGl0ZWN0dXJlIERpYWdyYW0gUGxhY2Vob2xkZXI8L3RleHQ+Cjx0ZXh0IHg9IjQwMCIgeT0iMjMwIiBmaWxsPSIjOTRhM2I4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCI+SW5wdXQgLT4gQ2xhc3NpZmllciAtPiBBSSBTZXJ2aWNlcyAtPiBBc3NlbWJsZXIgLT4gT3V0cHV0PC90ZXh0Pgo8L3N2Zz4K"
+                        alt="CogniLink AI Architecture"
+                        class="architecture-image"
+                    />
+                </div>
+            </div>
+        </section>
+
+        <section id="roadmap" class="section">
+            <div class="container">
+                <h2 class="section-title">Future Roadmap</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🧩</div>
+                        <h3>Multi-Route Expansion</h3>
+                        <p>Create more classification routes (video generation, data analysis, audio generation, and more) for broader coverage.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">📝</div>
+                        <h3>User Memory & Personalization</h3>
+                        <p>Enable the system to remember user preferences and personality to deliver more tailored results.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">📢</div>
+                        <h3>Community Feedback & Promotion</h3>
+                        <p>Gather user feedback, iterate rapidly, and promote the restaurant analogy video to simplify onboarding (continuous process).</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">💳</div>
+                        <h3>Premium API Integrations</h3>
+                        <p>Secure funding to integrate high-performance paid APIs when the user base and use-cases justify it.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">📈</div>
+                        <h3>Scaling & Growth</h3>
+                        <p>Focus on marketing, scaling infrastructure, and building a strong development pipeline for long-term impact.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🤖</div>
+                        <h3>Advanced AI Integration</h3>
+                        <p>Add more specialized AI models for enhanced capabilities across different domains.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🎨</div>
+                        <h3>Enhanced UI/UX</h3>
+                        <p>Cleaner interface design with improved user experience and accessibility features.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🔄</div>
+                        <h3>Dynamic Chained Processing</h3>
+                        <p>Sequential AI operations where one API's output becomes another's input for complex workflows.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="demo" class="section">
+            <div class="container">
+                <h2 class="section-title">Current Design</h2>
+                <div class="demo-grid">
+                    <div class="demo-card">
+                        <img src="Beta2-Frontend.png" alt="CogniLink AI Interface" class="demo-image" />
+                        <div class="demo-content">
+                            <h3>Interactive Chat Interface</h3>
+                            <p>
+                                Clean, professional interface that handles complex multi-domain requests seamlessly with intelligent routing to specialized AI engines.
+                                Includes an automated feedback system for user-suggested features, automatic previous user detection for sign-in, and a “Try asking” section
+                                to make testing the platform easier.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
-    <!-- Main app content (hidden on old host) -->
-    <div id="app-root">
-        <header>
-            <nav>
-                <a href="#" class="logo">
-                    <img src="LogoNoBackground.png" alt="CogniLink AI Logo" />
-                    CogniLink AI
-                </a>
-                <ul class="nav-links">
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#architecture">Architecture</a></li>
-                    <li><a href="#roadmap">Roadmap</a></li>
-                    <li><a href="#demo">Current Design</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </header>
-
-        <main>
-            <section class="hero">
-                <div class="hero-content">
-                    <div class="hero-logo-wrapper">
-                        <div class="hero-logo">
-                            <img src="LogoNoBackground.png" alt="CogniLink AI Logo" />
-                        </div>
-                    </div>
-                    <h1>CogniLink AI</h1>
-                    <p>One Platform. Infinite AI Power. Unlimited Creation.</p>
-
-                    <div class="cta-buttons">
-                        <!-- Point directly to new domain for Beta -->
-                        <a href="https://cognilink.online/AuthBeta.html" class="btn btn-primary" target="_blank">
-                            Use CogniLink (Beta)
-                        </a>
-                        <a href="https://youtu.be/r5vuiROgyjY?si=EeVxsBgVLZmRPZ3Q" class="btn btn-secondary" target="_blank">
-                            Watch Demo
-                        </a>
-                        <a href="https://youtu.be/4V7IfNzi1vo?si=H736N3o9zzedyCzq" class="btn btn-secondary" target="_blank">
-                            How it works
-                        </a>
-                    </div>
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>CogniLink AI</h3>
+                    <p>Skip juggles. Start smart. Use CogniLink.</p>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;">Licensed under the MIT License</p>
                 </div>
-            </section>
-
-            <div class="scroll-indicator" onclick="handleScroll()">
-                <span>Scroll to explore</span>
-                <div class="scroll-arrow">↓</div>
-            </div>
-
-            <section id="features" class="section">
-                <div class="container">
-                    <h2 class="section-title">Why CogniLink AI?</h2>
-                    <p style="text-align: center; color: var(--text-secondary); font-size: 1.2rem; max-width: 800px; margin: 0 auto;">
-                        Many current AI tools operate with one model at a time, which limits quality and throughput. CogniLink AI's intelligent routing allows multiple specialized AI engines to collaborate, unlocking best possible results for your daily tasks.
-                    </p>
-                    <p style="text-align:center; color:var(--text-secondary); font-size:1rem; max-width:720px; margin:0.5rem auto 0;">
-                        Designed for solo builders, students, and small teams who want multiple AI engines working together without juggling tabs and prompts.
-                    </p>
-                    
-                    <div class="feature-grid">
-                        <div class="feature-card">
-                            <div class="feature-icon">🧠</div>
-                            <h3>Smart Request Classifier</h3>
-                            <p>Automatically divides complex tasks into specialized categories (code, image, writing, web browsing, etc.) for optimal processing by expert AI engines.</p>
-                        </div>
-                        
-                        <div class="feature-card">
-                            <div class="feature-icon">⚡</div>
-                            <h3>Parallel Processing</h3>
-                            <p>Dedicated “kitchens” (APIs/services) work simultaneously on different aspects of your request, improving both speed and quality.</p>
-                        </div>
-                        
-                        <div class="feature-card">
-                            <div class="feature-icon">🔄</div>
-                            <h3>Centralized Coordination</h3>
-                            <p>Variable storage system ensures seamless coordination between different AI services and clean final assembly of results.</p>
-                        </div>
-                        
-                        <div class="feature-card">
-                            <div class="feature-icon">🔧</div>
-                            <h3>Extensible Architecture</h3>
-                            <p>Easily add more AI specialties, tasks, or services to expand capabilities without rebuilding the core system.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="architecture" class="section">
-                <div class="container">
-                    <div class="architecture-content">
-                        <h2 class="section-title">How It Works</h2>
-                        <p style="color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 2rem;">
-                            Like a digital waiter in a multi-cuisine restaurant — receives complex orders, splits them into smaller tickets, directs each to expert kitchens, and assembles all dishes into a perfect final meal.
-                        </p>
-                        <img
-                            src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDgwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjMTExODI3Ii8+Cjx0ZXh0IHg9IjQwMCIgeT0iMjAwIiBmaWxsPSIjOTRhM2I4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxOCI+QXJjaGl0ZWN0dXJlIERpYWdyYW0gUGxhY2Vob2xkZXI8L3RleHQ+Cjx0ZXh0IHg9IjQwMCIgeT0iMjMwIiBmaWxsPSIjOTRhM2I4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCI+SW5wdXQgLT4gQ2xhc3NpZmllciAtPiBBSSBTZXJ2aWNlcyAtPiBBc3NlbWJsZXIgLT4gT3V0cHV0PC90ZXh0Pgo8L3N2Zz4K"
-                            alt="CogniLink AI Architecture"
-                            class="architecture-image"
-                        />
-                    </div>
-                </div>
-            </section>
-
-            <section id="roadmap" class="section">
-                <div class="container">
-                    <h2 class="section-title">Future Roadmap</h2>
-                    <div class="feature-grid">
-                        <div class="feature-card">
-                            <div class="feature-icon">🧩</div>
-                            <h3>Multi-Route Expansion</h3>
-                            <p>Create more classification routes (video generation, data analysis, audio generation, and more) for broader coverage.</p>
-                        </div>
-
-                        <div class="feature-card">
-                            <div class="feature-icon">📝</div>
-                            <h3>User Memory & Personalization</h3>
-                            <p>Enable the system to remember user preferences and personality to deliver more tailored results.</p>
-                        </div>
-
-                        <div class="feature-card">
-                            <div class="feature-icon">📢</div>
-                            <h3>Community Feedback & Promotion</h3>
-                            <p>Gather user feedback, iterate rapidly, and promote the restaurant analogy video to simplify onboarding (continuous process).</p>
-                        </div>
-
-                        <div class="feature-card">
-                            <div class="feature-icon">💳</div>
-                            <h3>Premium API Integrations</h3>
-                            <p>Secure funding to integrate high-performance paid APIs when the user base and use-cases justify it.</p>
-                        </div>
-
-                        <div class="feature-card">
-                            <div class="feature-icon">📈</div>
-                            <h3>Scaling & Growth</h3>
-                            <p>Focus on marketing, scaling infrastructure, and building a strong development pipeline for long-term impact.</p>
-                        </div>
-
-                        <div class="feature-card">
-                            <div class="feature-icon">🤖</div>
-                            <h3>Advanced AI Integration</h3>
-                            <p>Add more specialized AI models for enhanced capabilities across different domains.</p>
-                        </div>
-                        
-                        <div class="feature-card">
-                            <div class="feature-icon">🎨</div>
-                            <h3>Enhanced UI/UX</h3>
-                            <p>Cleaner interface design with improved user experience and accessibility features.</p>
-                        </div>
-                        
-                        <div class="feature-card">
-                            <div class="feature-icon">🔄</div>
-                            <h3>Dynamic Chained Processing</h3>
-                            <p>Sequential AI operations where one API's output becomes another's input for complex workflows.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="demo" class="section">
-                <div class="container">
-                    <h2 class="section-title">Current Design</h2>
-                    <div class="demo-grid">
-                        <div class="demo-card">
-                            <img src="Beta2-Frontend.png" alt="CogniLink AI Interface" class="demo-image" />
-                            <div class="demo-content">
-                                <h3>Interactive Chat Interface</h3>
-                                <p>
-                                    Clean, professional interface that handles complex multi-domain requests seamlessly with intelligent routing to specialized AI engines.
-                                    Includes an automated feedback system for user-suggested features, automatic previous user detection for sign-in, and a “Try asking” section
-                                    to make testing the platform easier.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </main>
-
-        <footer id="contact">
-            <div class="container">
-                <div class="footer-content">
-                    <div class="footer-section">
-                        <h3>CogniLink AI</h3>
-                        <p>Skip juggles. Start smart. Use CogniLink.</p>
-                        <p style="margin-top: 1rem; font-size: 0.9rem;">Licensed under the MIT License</p>
-                    </div>
-                    
-                    <div class="footer-section">
-                        <h3>Creator</h3>
-                        <p><strong>Ayush Gupta</strong></p>
-                        <a href="mailto:ayush0108.gupta@gmail.com">ayush0108.gupta@gmail.com</a>
-                        <div class="social-links">
-                            <a href="https://www.linkedin.com/in/ayush-gupta-209a59343" target="_blank" title="LinkedIn">in</a>
-                            <a href="http://medium.com/@ayushgupta0108" target="_blank" title="Medium">M</a>
-                            <a href="https://www.behance.net/ayushgupta0108" target="_blank" title="Behance">Be</a>
-                            <a href="https://github.com/AyushGupta-0108" target="_blank" title="GitHub">GH</a>
-                            <a href="https://www.instagram.com/cognilink.ai" target="_blank" title="Instagram">IG</a>
-                            <a href="https://youtube.com/@cognilink-ai?si=6pAdF-hF3S3OhGXr" target="_blank" title="YouTube">YT</a>
-                        </div>
-                    </div>
-                    
-                    <div class="footer-section">
-                        <h3>Quick Links</h3>
-                        <a href="https://cognilink.online/AuthBeta.html" target="_blank"><strong>Open CogniLink AI</strong></a>
-                        <a href="https://youtu.be/r5vuiROgyjY?si=EeVxsBgVLZmRPZ3Q" target="_blank">Demo Video</a>
-                        <a href="https://youtu.be/4V7IfNzi1vo?si=H736N3o9zzedyCzq" target="_blank">How it works</a>
+                
+                <div class="footer-section">
+                    <h3>Creator</h3>
+                    <p><strong>Ayush Gupta</strong></p>
+                    <a href="mailto:ayush0108.gupta@gmail.com">ayush0108.gupta@gmail.com</a>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/ayush-gupta-209a59343" target="_blank" title="LinkedIn">in</a>
+                        <a href="http://medium.com/@ayushgupta0108" target="_blank" title="Medium">M</a>
+                        <a href="https://www.behance.net/ayushgupta0108" target="_blank" title="Behance">Be</a>
+                        <a href="https://github.com/AyushGupta-0108" target="_blank" title="GitHub">GH</a>
+                        <a href="https://www.instagram.com/cognilink.ai" target="_blank" title="Instagram">IG</a>
+                        <a href="https://youtube.com/@cognilink-ai?si=6pAdF-hF3S3OhGXr" target="_blank" title="YouTube">YT</a>
                     </div>
                 </div>
                 
-                <div class="footer-bottom">
-                    <p>&copy; 2025 Ayush Gupta. All rights reserved. | CogniLink AI</p>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="https://ayushgupta-0108.github.io/CogniLink-AI/AuthBeta.html" target="_blank"><strong>Open CogniLink AI</strong></a>
+                    <a href="https://youtu.be/r5vuiROgyjY?si=EeVxsBgVLZmRPZ3Q" target="_blank">Demo Video</a>
+                    <a href="https://youtu.be/4V7IfNzi1vo?si=H736N3o9zzedyCzq" target="_blank">How it works</a>
                 </div>
             </div>
-        </footer>
-    </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Ayush Gupta. All rights reserved. | CogniLink AI</p>
+            </div>
+        </div>
+    </footer>
 
-    <!-- Old-host redirect logic -->
-    <script>
-        (function () {
-            var OLD_HOST = "ayushgupta-0108.github.io";
-            var NEW_ROOT = "https://cognilink.online";
-
-            if (window.location.hostname !== OLD_HOST) {
-                return; // On cognilink.online → show normal page, no redirect screen
-            }
-
-            // We are on the old GitHub Pages host
-            // Example paths:
-            //   /CogniLink-AI/
-            //   /CogniLink-AI/index.html
-            //   /CogniLink-AI/AuthBeta.html
-            var path = window.location.pathname || "/";
-            var basePrefix = "/CogniLink-AI";
-
-            var subpath = path.startsWith(basePrefix)
-                ? path.substring(basePrefix.length) || "/"
-                : "/";
-
-            var target = NEW_ROOT + subpath;
-
-            // Switch layout to redirect mode
-            document.documentElement.classList.add("legacy-host");
-
-            var link = document.getElementById("cta-link");
-            var countdownEl = document.getElementById("countdown");
-            var card = document.getElementById("moved-card");
-
-            if (link) {
-                link.href = target;
-                // Show clean version without protocol
-                link.textContent = target.replace(/^https?:\/\//, "");
-            }
-
-            if (card) {
-                card.hidden = false;
-            }
-
-            var seconds = 10;
-            if (countdownEl) {
-                countdownEl.textContent = seconds;
-                var timer = setInterval(function () {
-                    seconds--;
-                    if (seconds <= 0) {
-                        clearInterval(timer);
-                    }
-                    countdownEl.textContent = Math.max(seconds, 0);
-                }, 1000);
-            }
-
-            // Hard redirect after 10 seconds
-            setTimeout(function () {
-                window.location.href = target;
-            }, 10000);
-        })();
-    </script>
-
-    <!-- Existing scroll indicator logic -->
     <script>
         const scrollIndicator = document.querySelector('.scroll-indicator');
 
