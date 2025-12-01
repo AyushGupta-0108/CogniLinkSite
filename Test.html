@@ -144,7 +144,7 @@ body {
   padding:0.75rem 0.25rem 1.25rem;
 }
 
-/* --- Welcome Screen (center state) --- */
+/* --- Welcome Screen --- */
 .welcome-screen {
   text-align:center;
   color:#9ca3af;
@@ -367,4 +367,326 @@ body {
         <span class="logo-text">CogniLink <span class="beta-pill">beta</span></span>
     </div>
     <div class="header-buttons">
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdaHARPxlD0MeFM4G5__Q7K22HVWYaPh_wfJ1pvGV-AdJv9Bw/viewform?
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdaHARPxlD0MeFM4G5__Q7K22HVWYaPh_wfJ1pvGV-AdJv9Bw/viewform?usp=header" target="_blank" class="feedback-btn">
+            <span>📝 Feedback</span>
+        </a>
+        <button class="new-chat-btn" id="newChatBtn"><span>➕ New Chat</span></button>
+        <button class="new-chat-btn" id="loginBtn"><span>🔑 Login</span></button>
+    </div>
+</div>
+
+<div class="main-content">
+    <div class="recent-chats" id="recentChats">
+        <h3>Recent Chats</h3>
+    </div>
+
+    <div class="messages-area" id="messagesArea">
+        <div class="messages-container" id="messagesContainer">
+            <div class="welcome-screen" id="welcomeScreen">
+                <h2>Welcome to CogniLink AI</h2>
+                <p class="subtitle">How can I assist you today?</p>
+                <div class="info-box">
+                    <div class="info-icon">ℹ️</div>
+                    <div class="info-text">
+                        Currently running entirely on free/open AI models (Llama, Cohere, ByteDance) for research purposes.
+                        Premium models will be added soon.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="sidebar">
+        <h3>Try asking?</h3>
+        <div class="prompt-category">
+            <h4>Simple Tasks</h4>
+            <div class="prompt-item" onclick="sendPrompt('Write a short story where a robot discovers it has emotions for the first time.')">
+                Write a short story where a robot discovers it has emotions for the first time.
+            </div>
+            <div class="prompt-item" onclick="sendPrompt('Illustrate a fantasy landscape with waterfalls.')">
+                Illustrate a fantasy landscape with waterfalls.
+            </div>
+            <div class="prompt-item" onclick="sendPrompt('Generate a small python code that prints a random number.')">
+                Generate a small python code that prints a random number.
+            </div>
+        </div>
+        <div class="prompt-category">
+            <h4>Complex Tasks</h4>
+            <div class="prompt-item" onclick="sendPrompt('Write a humorous advertisement for a time-traveling toaster, code a small HTML page to display the ad, and generate an image of the toaster in action.')">
+                Write a humorous advertisement for a time-traveling toaster, code a small HTML page to display the ad, and generate an image of the toaster in action.
+            </div>
+            <div class="prompt-item" onclick="sendPrompt('Create a short story about a robot exploring a fantasy world, and generate a Python function that prints a map of the world. Also, visualize one scene from the story.')">
+                Create a short story about a robot exploring a fantasy world, and generate a Python function that prints a map of the world. Also, visualize one scene from the story.
+            </div>
+            <div class="prompt-item" onclick="sendPrompt('Describe a superhero with a quirky superpower. Create a JavaScript function that reverses a string. Generate an image of a sunset over a futuristic city.')">
+                Describe a superhero with a quirky superpower. Create a JavaScript function that reverses a string. Generate an image of a sunset over a futuristic city.
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="input-area">
+    <div class="feedback-notice">
+        Please click the feedback button after using the platform. Zoom out page for full view if using in Mobile Browser.
+    </div>
+    <div class="input-container">
+        <textarea id="inputField" class="input-field" placeholder="Message CogniLink..." rows="1"></textarea>
+        <button class="send-btn" id="sendBtn" disabled>▶</button>
+    </div>
+</div>
+
+<!-- Login notice popup -->
+<div id="loginNoticePopup" style="
+    display:none;
+    position:fixed;
+    top:0; left:0; width:100%; height:100%;
+    background:rgba(0,0,0,0.6);
+    justify-content:center; align-items:center;
+    z-index:10000;
+">
+  <div style="
+      background:#1f2937; color:white; padding:2rem; border-radius:1rem;
+      text-align:center; max-width:400px; width:90%;
+  ">
+    <h2 style="margin:0 0 1rem;">⚠️ Please login to use. Spot Login Button at upper right corner.</h2>
+    <button id="noticeOkBtn" style="
+        margin-top:1rem; padding:0.5rem 1rem; background:#2563eb; color:white;
+        border:none; border-radius:0.5rem; cursor:pointer;
+    ">OK</button>
+  </div>
+</div>
+
+<!-- Firebase Scripts -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-analytics.js";
+  import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged, updateProfile } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAehpDu97VYZiW3Gs39wliUzrfLMDiQByw",
+    authDomain: "cognilink-ai.firebaseapp.com",
+    projectId: "cognilink-ai",
+    storageBucket: "cognilink-ai.firebasestorage.app",
+    messagingSenderId: "768063000383",
+    appId: "1:768063000383:web:6dea8d546752c2a746cd8a",
+    measurementId: "G-Z2WDYG9PDM"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const auth = getAuth(app);
+  const provider = new GoogleAuthProvider();
+
+  provider.addScope('profile');
+  provider.addScope('email');
+
+  window.auth = auth;
+  window.provider = provider;
+  window.isLoggedIn = false;
+
+  const loginBtn = document.getElementById('loginBtn');
+  const sendBtn = document.getElementById('sendBtn');
+
+  if (loginBtn) {
+    loginBtn.addEventListener('click', async () => {
+      try { 
+        const result = await signInWithPopup(auth, provider);
+        console.log('Login successful:', result.user.email);
+      }
+      catch(e){ 
+        console.error('Login error:', e);
+        alert("Login failed: " + e.message); 
+      }
+    });
+  }
+
+  onAuthStateChanged(auth, async (user) => {
+    window.isLoggedIn = !!user;
+    
+    if(user){
+      if (!user.displayName) {
+        try {
+          const providerData = user.providerData[0];
+          if (providerData && providerData.displayName) {
+            await updateProfile(user, {
+              displayName: providerData.displayName,
+              photoURL: providerData.photoURL || user.photoURL
+            });
+          } else if (user.email) {
+            const emailName = user.email.split('@')[0];
+            await updateProfile(user, {
+              displayName: emailName
+            });
+          }
+        } catch (error) {
+          console.error('Error updating profile:', error);
+        }
+      }
+      
+      if(loginBtn) loginBtn.style.display='none';
+      if(sendBtn) sendBtn.disabled=false;
+    } else {
+      if(loginBtn) loginBtn.style.display='block';
+      if(sendBtn) sendBtn.disabled=true;
+    }
+  });
+
+  window.logout = () => signOut(auth).then(()=>console.log("Logged out"));
+</script>
+
+<!-- Chat functionality script -->
+<script>
+var isLoading=false;
+var chatHistory=[];
+var currentChat={id:null,messages:[]};
+var chatCounter=1;
+
+function addMessage(type,content){
+    if(!currentChat.messages)currentChat.messages=[];
+    currentChat.messages.push({type:type,msg:content});
+    var welcome=document.getElementById('welcomeScreen');
+    if(welcome)welcome.remove();
+    var c=document.getElementById('messagesContainer');
+    var msg=document.createElement('div');
+    msg.className='message '+type;
+    var contentDiv=document.createElement('div');
+    contentDiv.className='message-content';
+    contentDiv.textContent=content;
+    msg.appendChild(contentDiv);
+    c.appendChild(msg);
+    scrollToBottom();
+}
+
+function addLoadingMessage(){
+    var c=document.getElementById('messagesContainer');
+    var msg=document.createElement('div');
+    msg.className='message ai';
+    msg.id='loadingMessage';
+    msg.innerHTML='<div class="message-content"><div class="loading-message"><div class="loading-dots"><div class="loading-dot"></div><div class="loading-dot"></div><div class="loading-dot"></div></div><span class="loading-text">Working on your query...</span></div></div>';
+    c.appendChild(msg);
+    scrollToBottom();
+}
+
+function removeLoadingMessage(){ 
+    var l=document.getElementById('loadingMessage'); 
+    if(l)l.remove(); 
+}
+
+function scrollToBottom(){ 
+    var area=document.getElementById('messagesArea'); 
+    area.scrollTop=area.scrollHeight; 
+}
+
+function sendMessage(){
+    if(isLoading)return;
+    var input=document.getElementById('inputField');
+    var msg=input.value.trim();
+    if(!msg)return;
+    
+    addMessage('user',msg);
+    input.value='';
+    isLoading=true;
+    sendBtn.disabled=true;
+    addLoadingMessage();
+    
+    fetch('https://hook.eu2.make.com/evryrofrqq9lvnp8dl9mopx2vqw8bonn',{
+        method:'POST', 
+        headers:{'Content-Type':'application/json'}, 
+        body:JSON.stringify({message:msg})
+    }).then(r=>r.text()).then(data=>{
+        removeLoadingMessage(); 
+        addMessage('ai',data);
+        isLoading=false; 
+        sendBtn.disabled=false;
+    }).catch(()=>{
+        removeLoadingMessage();
+        addMessage('ai','Sorry, there was an error. Please try again.');
+        isLoading=false; 
+        sendBtn.disabled=false;
+    });
+}
+
+function sendPrompt(text){ 
+    document.getElementById('inputField').value=text; 
+    sendMessage(); 
+}
+
+function newChat(){
+    if(currentChat.messages.length>0){
+        var saved={id:chatCounter,messages:currentChat.messages.slice()};
+        chatHistory.push(saved);
+        addChatToSidebar(saved);
+        chatCounter++;
+    }
+    currentChat={id:null,messages:[]};
+    document.getElementById('messagesContainer').innerHTML =
+      '<div class="welcome-screen" id="welcomeScreen">' +
+        '<h2>Welcome to CogniLink AI</h2>' +
+        '<p class="subtitle">How can I assist you today?</p>' +
+        '<div class="info-box">' +
+          '<div class="info-icon">ℹ️</div>' +
+          '<div class="info-text">Currently running entirely on free/open AI models (Llama, Cohere, ByteDance) for research purposes. Premium models will be added soon.</div>' +
+        '</div>' +
+      '</div>';
+    document.getElementById('inputField').value='';
+}
+
+function addChatToSidebar(chat){
+    var side=document.getElementById('recentChats');
+    var div=document.createElement('div');
+    div.className='chat-item';
+    div.textContent='Chat-'+chat.id;
+    div.onclick=function(){loadChat(chat.id)};
+    side.appendChild(div);
+}
+
+function loadChat(id){
+    var chat=chatHistory.find(c=>c.id===id);
+    if(!chat)return;
+    currentChat={id:chat.id,messages:chat.messages.slice()};
+    var c=document.getElementById('messagesContainer'); 
+    c.innerHTML='';
+    currentChat.messages.forEach(m=>addMessage(m.type,m.msg));
+}
+
+document.getElementById('sendBtn').addEventListener('click',sendMessage);
+document.getElementById('newChatBtn').addEventListener('click',newChat);
+document.getElementById('inputField').addEventListener('keypress',function(e){
+    if(e.key==='Enter'&&!e.shiftKey){ 
+        e.preventDefault(); 
+        sendMessage(); 
+    }
+});
+</script>
+
+<!-- Login notice popup handler -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const inputField = document.getElementById('inputField');
+  const loginNoticePopup = document.getElementById('loginNoticePopup');
+  const noticeOkBtn = document.getElementById('noticeOkBtn');
+
+  if (!inputField) { 
+    console.error("inputField not found"); 
+    return; 
+  }
+
+  let noticeShown = false;
+
+  inputField.addEventListener('focus', () => {
+    if (!window.isLoggedIn && !noticeShown) {
+      loginNoticePopup.style.display = 'flex';
+      inputField.blur();
+      noticeShown = true;
+    }
+  });
+
+  noticeOkBtn.addEventListener('click', () => {
+    loginNoticePopup.style.display = 'none';
+    inputField.focus();
+  });
+});
+</script>
+
+</body>
+</html>
