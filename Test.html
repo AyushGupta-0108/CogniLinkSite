@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CogniLink AI - Intelligent AI Orchestration Platform</title>
     <meta name="description" content="CogniLink AI acts like a digital waiter in a multi-cuisine restaurant — intelligent routing for multiple specialized AI engines to collaborate.">
     
     <style>
         :root {
-            --bg-primary: #0b0f19;
-            --bg-secondary: #0e1424;
-            --bg-card: #111827;
+            --bg-primary: #020617;
+            --bg-secondary: #020617;
+            --bg-card: #0b1120;
             --text-primary: #f1f5f9;
             --text-secondary: #94a3b8;
             --accent-primary: #3b82f6;
             --accent-secondary: #1d4ed8;
-            --border: rgba(255, 255, 255, 0.1);
-            --shadow: rgba(0, 0, 0, 0.5);
+            --border: rgba(148, 163, 184, 0.35);
+            --shadow: rgba(0, 0, 0, 0.7);
         }
         * {
             margin: 0;
@@ -25,7 +25,11 @@
         }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: var(--bg-primary);
+            /* Cooler blue gradient background */
+            background:
+                radial-gradient(circle at 0% 0%, rgba(37, 99, 235, 0.4) 0, transparent 45%),
+                radial-gradient(circle at 100% 100%, rgba(56, 189, 248, 0.35) 0, transparent 50%),
+                radial-gradient(circle at 50% 0%, #020617 0, #020617 55%, #000 100%);
             color: var(--text-primary);
             line-height: 1.6;
             overflow-x: hidden;
@@ -35,14 +39,15 @@
             margin: 0 auto;
             padding: 0 2rem;
         }
+
         /* Header */
         header {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            background: rgba(11, 15, 25, 0.95);
-            backdrop-filter: blur(10px);
+            background: radial-gradient(circle at top, rgba(15,23,42,0.98), rgba(15,23,42,0.96));
+            backdrop-filter: blur(14px);
             border-bottom: 1px solid var(--border);
             z-index: 1000;
         }
@@ -50,7 +55,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 2rem;
+            padding: 0.9rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
         }
         .logo {
             display: flex;
@@ -74,12 +81,14 @@
         .nav-links a {
             color: var(--text-secondary);
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: color 0.25s ease;
             font-weight: 500;
+            font-size: 0.98rem;
         }
         .nav-links a:hover {
             color: var(--accent-primary);
         }
+
         /* Hero Section */
         .hero {
             min-height: 100vh;
@@ -88,51 +97,101 @@
             justify-content: center;
             text-align: center;
             position: relative;
-            background: radial-gradient(circle at top, #111827 0, #0b0f19 45%, #020617 100%);
             padding: 6rem 1rem 4rem;
         }
         .hero-content {
-            max-width: 800px;
-            z-index: 2;
-            padding: 2.5rem 2rem 2.75rem;
+            max-width: 980px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 2.75rem 2.6rem 3rem;
             border-radius: 24px;
-            background: radial-gradient(circle at top, rgba(15,23,42,0.9), rgba(15,23,42,0.98));
-            border: 1px solid rgba(148, 163, 184, 0.3);
-            box-shadow: 0 30px 80px rgba(0,0,0,0.75);
+            background:
+                radial-gradient(circle at top, rgba(15,23,42,0.94), rgba(15,23,42,0.98));
+            border: 1px solid rgba(148, 163, 184, 0.4);
+            backdrop-filter: blur(20px);
+            box-shadow:
+                0 30px 80px rgba(0, 0, 0, 0.9),
+                0 0 40px rgba(37, 99, 235, 0.45);
+        }
+
+        /* OPTION A: Breathing core + neon orbit logo animation */
+        .hero-logo-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
         }
         .hero-logo {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 2rem;
-            background: radial-gradient(circle at 30% 0%, #3b82f6 0, #111827 45%, #020617 100%);
-            border-radius: 50%;
+            position: relative;
+            width: 130px;
+            height: 130px;
+            border-radius: 999px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 20px 50px var(--shadow);
+            background: radial-gradient(circle at 30% 0%, #3b82f6 0, #020617 55%, #000 100%);
+            box-shadow:
+                0 0 40px rgba(59, 130, 246, 0.7),
+                0 25px 50px rgba(0, 0, 0, 0.9);
             animation: heroFloat 4s ease-in-out infinite;
-            position: relative;
+            overflow: visible;
         }
+        /* Neon orbit ring */
         .hero-logo::before {
             content: "";
             position: absolute;
             inset: -10px;
             border-radius: 999px;
-            background: radial-gradient(circle, rgba(59,130,246,0.3), transparent 60%);
-            opacity: 0.9;
-            filter: blur(4px);
-            z-index: -1;
+            border: 2px solid rgba(59, 130, 246, 0.7);
+            box-shadow: 0 0 26px rgba(59, 130, 246, 0.9);
+            opacity: 0.95;
+            animation: orbitSpin 5.5s linear infinite;
+        }
+        /* Soft inner pulse */
+        .hero-logo::after {
+            content: "";
+            position: absolute;
+            width: 90%;
+            height: 90%;
+            border-radius: inherit;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.45), transparent 65%);
+            filter: blur(6px);
+            opacity: 0.85;
+            animation: corePulse 2.8s ease-in-out infinite;
+            pointer-events: none;
         }
         .hero-logo img {
-            width: 84px;
-            height: 84px;
+            width: 86px;
+            height: 86px;
             object-fit: contain;
-            animation: heroLogoPulseSpin 5s ease-in-out infinite;
+            position: relative;
+            z-index: 1;
+            animation: logoBreathSpin 4.8s ease-in-out infinite;
+        }
+
+        @keyframes heroFloat {
+            0%, 100% { transform: translateY(0); }
+            50%      { transform: translateY(-6px); }
+        }
+        @keyframes orbitSpin {
+            0%   { transform: rotate(0deg) scale(1); }
+            50%  { transform: rotate(180deg) scale(1.03); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+        @keyframes corePulse {
+            0%,100% { opacity:0.55; transform: scale(0.95); }
+            50%     { opacity:1;    transform: scale(1.07); }
+        }
+        @keyframes logoBreathSpin {
+            0%   { transform: scale(1) rotate(0deg); }
+            25%  { transform: scale(1.08) rotate(6deg); }
+            50%  { transform: scale(1.12) rotate(-4deg); }
+            75%  { transform: scale(1.04) rotate(3deg); }
+            100% { transform: scale(1) rotate(0deg); }
         }
 
         .hero h1 {
             font-size: 3.5rem;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
             background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
             background-clip: text;
             -webkit-background-clip: text;
@@ -140,10 +199,13 @@
             font-weight: 800;
         }
         .hero p {
-            font-size: 1.3rem;
+            font-size: 1.25rem;
             color: var(--text-secondary);
-            margin-bottom: 2rem;
+            margin-bottom: 2.1rem;
             line-height: 1.8;
+            max-width: 640px;
+            margin-left: auto;
+            margin-right: auto;
         }
         .cta-buttons {
             display: flex;
@@ -152,44 +214,33 @@
             flex-wrap: wrap;
         }
         .btn {
-            padding: 1rem 2rem;
+            padding: 0.95rem 2rem;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
-            transition: all 0.3s ease;
+            transition: all 0.25s ease;
             border: none;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 0.98rem;
         }
         .btn-primary {
             background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
             color: white;
-            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.55);
         }
         .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.45);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 16px 40px rgba(37, 99, 235, 0.75);
         }
         .btn-secondary {
-            background: transparent;
+            background: rgba(15, 23, 42, 0.9);
             color: var(--text-primary);
-            border: 1px solid rgba(148, 163, 184, 0.6);
+            border: 1px solid rgba(148, 163, 184, 0.7);
         }
         .btn-secondary:hover {
             border-color: var(--accent-primary);
             color: var(--accent-primary);
-        }
-
-        .cta-badge {
-            margin-top: 1rem;
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            padding: 0.5rem 0.9rem;
-            border-radius: 999px;
-            display: inline-block;
-            border: 1px solid rgba(148, 163, 184, 0.4);
-            background: rgba(15, 23, 42, 0.7);
-            backdrop-filter: blur(8px);
+            transform: translateY(-2px);
         }
 
         /* Scroll Indicator */
@@ -222,7 +273,7 @@
             font-size: 1.5rem;
             background: rgba(11, 15, 25, 0.9);
             backdrop-filter: blur(10px);
-            box-shadow: 0 0 12px rgba(59,130,246,0.6);
+            box-shadow: 0 0 14px rgba(59, 130, 246, 0.7);
         }
         .scroll-indicator.hidden {
             opacity: 0;
@@ -233,32 +284,9 @@
             transform: rotate(180deg);
             transition: transform 0.3s ease;
         }
-
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
             50%      { transform: translateY(-6px); }
-        }
-        @keyframes heroFloat {
-            0%, 100% { transform: translateY(0); }
-            50%      { transform: translateY(-6px); }
-        }
-        /* Logo grows + spins then shrinks */
-        @keyframes heroLogoPulseSpin {
-            0% {
-                transform: scale(1) rotate(0deg);
-            }
-            25% {
-                transform: scale(1.12) rotate(90deg);
-            }
-            50% {
-                transform: scale(1.18) rotate(180deg);
-            }
-            75% {
-                transform: scale(0.96) rotate(270deg);
-            }
-            100% {
-                transform: scale(1) rotate(360deg);
-            }
         }
 
         /* Sections */
@@ -283,11 +311,12 @@
             padding: 2rem;
             border-radius: 16px;
             border: 1px solid var(--border);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
         }
         .feature-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 20px 40px var(--shadow);
+            border-color: rgba(59,130,246,0.7);
         }
         .feature-icon {
             width: 60px;
@@ -309,9 +338,10 @@
             color: var(--text-secondary);
             line-height: 1.6;
         }
+
         /* Architecture Section */
         .architecture {
-            background: var(--bg-secondary);
+            background: radial-gradient(circle at top, #020617 0, #020617 100%);
         }
         .architecture-content {
             text-align: center;
@@ -322,6 +352,12 @@
             box-shadow: 0 20px 50px var(--shadow);
             margin: 2rem 0;
         }
+
+        /* Roadmap (slightly darker) */
+        #roadmap {
+            background: radial-gradient(circle at bottom, #020617 0, #020617 100%);
+        }
+
         /* Demo Section */
         .demo-grid {
             display: grid;
@@ -335,20 +371,19 @@
             border-radius: 16px;
             overflow: hidden;
             border: 1px solid var(--border);
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             max-width: 450px;
         }
         .demo-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 20px 40px var(--shadow);
         }
         .demo-image {
             width: 100%;
             height: auto;
-            max-height: none;
             object-fit: contain;
             display: block;
         }
-
         .demo-content {
             padding: 1.5rem;
         }
@@ -356,9 +391,10 @@
             margin-bottom: 1rem;
             color: var(--text-primary);
         }
+
         /* Footer */
         footer {
-            background: var(--bg-secondary);
+            background: radial-gradient(circle at top, #020617 0, #020617 100%);
             padding: 3rem 0;
             border-top: 1px solid var(--border);
         }
@@ -395,7 +431,7 @@
             align-items: center;
             justify-content: center;
             color: var(--text-secondary);
-            transition: all 0.3s ease;
+            transition: all 0.25s ease;
         }
         .social-links a:hover {
             background: var(--accent-primary);
@@ -408,19 +444,20 @@
             border-top: 1px solid var(--border);
             color: var(--text-secondary);
         }
+
         /* Responsive */
         @media (max-width: 768px) {
             .hero {
                 padding-top: 5.5rem;
             }
+            .hero-content {
+                padding: 2.3rem 1.6rem 2.4rem;
+            }
             .hero h1 {
                 font-size: 2.5rem;
             }
             .hero p {
-                font-size: 1.1rem;
-            }
-            .hero-content {
-                padding: 2rem 1.5rem 2.25rem;
+                font-size: 1.05rem;
             }
             .nav-links {
                 display: none;
@@ -429,7 +466,7 @@
                 padding: 0 1rem;
             }
             nav {
-                padding: 1rem;
+                padding: 0.8rem 1.25rem;
             }
             .scroll-indicator {
                 bottom: 1rem;
@@ -449,7 +486,7 @@
     <header>
         <nav>
             <a href="#" class="logo">
-                <img src="LogoNoBackground.png" alt="CogniLink AI Logo">
+                <img src="LogoNoBackground.png" alt="CogniLink AI Logo" />
                 CogniLink AI
             </a>
             <ul class="nav-links">
@@ -461,14 +498,18 @@
             </ul>
         </nav>
     </header>
+
     <main>
         <section class="hero">
             <div class="hero-content">
-                <div class="hero-logo">
-                    <img src="LogoNoBackground.png" alt="CogniLink AI Logo">
+                <div class="hero-logo-wrapper">
+                    <div class="hero-logo">
+                        <img src="LogoNoBackground.png" alt="CogniLink AI Logo" />
+                    </div>
                 </div>
                 <h1>CogniLink AI</h1>
                 <p>One Platform. Infinite AI Power. Unlimited Creation.</p>
+
                 <div class="cta-buttons">
                     <a href="https://ayushgupta-0108.github.io/CogniLink-AI/AuthBeta.html" class="btn btn-primary" target="_blank">
                         Use CogniLink (Beta)
@@ -480,15 +521,14 @@
                         How it works
                     </a>
                 </div>
-                <div class="cta-badge">
-                    Currently powered by free/open models (Llama, Cohere, ByteDance). Premium APIs coming soon.
-                </div>
             </div>
         </section>
+
         <div class="scroll-indicator" onclick="handleScroll()">
             <span>Scroll to explore</span>
             <div class="scroll-arrow">↓</div>
         </div>
+
         <section id="features" class="section">
             <div class="container">
                 <h2 class="section-title">Why CogniLink AI?</h2>
@@ -509,13 +549,13 @@
                     <div class="feature-card">
                         <div class="feature-icon">⚡</div>
                         <h3>Parallel Processing</h3>
-                        <p>Dedicated "kitchens" (APIs/services) work simultaneously on different aspects of your request, dramatically improving speed and quality.</p>
+                        <p>Dedicated “kitchens” (APIs/services) work simultaneously on different aspects of your request, improving both speed and quality.</p>
                     </div>
                     
                     <div class="feature-card">
                         <div class="feature-icon">🔄</div>
                         <h3>Centralized Coordination</h3>
-                        <p>Variable storage system ensures seamless coordination between different AI services and perfect final assembly of results.</p>
+                        <p>Variable storage system ensures seamless coordination between different AI services and clean final assembly of results.</p>
                     </div>
                     
                     <div class="feature-card">
@@ -526,6 +566,7 @@
                 </div>
             </div>
         </section>
+
         <section id="architecture" class="section architecture">
             <div class="container">
                 <div class="architecture-content">
@@ -533,11 +574,16 @@
                     <p style="color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 2rem;">
                         Like a digital waiter in a multi-cuisine restaurant — receives complex orders, splits them into smaller tickets, directs each to expert kitchens, and assembles all dishes into a perfect final meal.
                     </p>
-                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDgwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjMTExODI3Ii8+Cjx0ZXh0IHg9IjQwMCIgeT0iMjAwIiBmaWxsPSIjOTRhM2I4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxOCI+QXJjaGl0ZWN0dXJlIERpYWdyYW0gUGxhY2Vob2xkZXI8L3RleHQ+Cjx0ZXh0IHg9IjQwMCIgeT0iMjMwIiBmaWxsPSIjOTRhM2I4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCI+SW5wdXQgLT4gQ2xhc3NpZmllciAtPiBBSSBTZXJ2aWNlcyAtPiBBc3NlbWJsZXIgLT4gT3V0cHV0PC90ZXh0Pgo8L3N2Zz4K" alt="CogniLink AI Architecture" class="architecture-image">
+                    <img
+                        src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDgwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjMTExODI3Ii8+Cjx0ZXh0IHg9IjQwMCIgeT0iMjAwIiBmaWxsPSIjOTRhM2I4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxOCI+QXJjaGl0ZWN0dXJlIERpYWdyYW0gUGxhY2Vob2xkZXI8L3RleHQ+Cjx0ZXh0IHg9IjQwMCIgeT0iMjMwIiBmaWxsPSIjOTRhM2I4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCI+SW5wdXQgLT4gQ2xhc3NpZmllciAtPiBBSSBTZXJ2aWNlcyAtPiBBc3NlbWJsZXIgLT4gT3V0cHV0PC90ZXh0Pgo8L3N2Zz4K"
+                        alt="CogniLink AI Architecture"
+                        class="architecture-image"
+                    />
                 </div>
             </div>
         </section>
-        <section id="roadmap" class="section" style="background: var(--bg-secondary);">
+
+        <section id="roadmap" class="section">
             <div class="container">
                 <h2 class="section-title">Future Roadmap</h2>
                 <div class="feature-grid">
@@ -556,13 +602,13 @@
                     <div class="feature-card">
                         <div class="feature-icon">📢</div>
                         <h3>Community Feedback & Promotion</h3>
-                        <p>Gather user feedback, iterate rapidly, and promote the restaurant analogy video to simplify onboarding (continuously ongoing).</p>
+                        <p>Gather user feedback, iterate rapidly, and promote the restaurant analogy video to simplify onboarding (continuous process).</p>
                     </div>
 
                     <div class="feature-card">
                         <div class="feature-icon">💳</div>
                         <h3>Premium API Integrations</h3>
-                        <p>Secure funding to integrate high-performance paid APIs.</p>
+                        <p>Secure funding to integrate high-performance paid APIs when the user base and use-cases justify it.</p>
                     </div>
 
                     <div class="feature-card">
@@ -591,21 +637,27 @@
                 </div>
             </div>
         </section>
+
         <section id="demo" class="section">
             <div class="container">
                 <h2 class="section-title">Current Design</h2>
                 <div class="demo-grid">
                     <div class="demo-card">
-                        <img src="Beta2-Frontend.png" alt="CogniLink AI Interface" class="demo-image">
+                        <img src="Beta2-Frontend.png" alt="CogniLink AI Interface" class="demo-image" />
                         <div class="demo-content">
                             <h3>Interactive Chat Interface</h3>
-                            <p>Clean, professional interface that handles complex multi-domain requests seamlessly with intelligent routing to specialized AI engines. Contains automated feedback system for user-suggested feature additions and continuous improvement, automatic previous user detection for automatic sign-in, and a “Try asking” section for easier testing of the platform.</p>
+                            <p>
+                                Clean, professional interface that handles complex multi-domain requests seamlessly with intelligent routing to specialized AI engines.
+                                Includes an automated feedback system for user-suggested features, automatic previous user detection for sign-in, and a “Try asking” section
+                                to make testing the platform easier.
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
     </main>
+
     <footer id="contact">
         <div class="container">
             <div class="footer-content">
@@ -642,38 +694,35 @@
             </div>
         </div>
     </footer>
+
     <script>
         const scrollIndicator = document.querySelector('.scroll-indicator');
-        
-        // Function to handle scroll button click
+
         function handleScroll() {
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             const scrollHeight = document.documentElement.scrollHeight;
             const clientHeight = document.documentElement.clientHeight;
             
-            // Check if at bottom
             if (scrollTop + clientHeight >= scrollHeight - 100) {
-                // Scroll to top
                 window.scrollTo({top: 0, behavior: 'smooth'});
             } else {
-                // Scroll down by viewport height
                 window.scrollBy({top: clientHeight - 100, behavior: 'smooth'});
             }
         }
         
-        // Update arrow direction based on scroll position
-        window.addEventListener('scroll', function() {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            const scrollHeight = document.documentElement.scrollHeight;
-            const clientHeight = document.documentElement.clientHeight;
-            
-            // Check if user is at bottom
-            if (scrollTop + clientHeight >= scrollHeight - 100) {
-                scrollIndicator.classList.add('at-bottom');
-            } else {
-                scrollIndicator.classList.remove('at-bottom');
-            }
-        });
+        if (scrollIndicator) {
+            window.addEventListener('scroll', function() {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const scrollHeight = document.documentElement.scrollHeight;
+                const clientHeight = document.documentElement.clientHeight;
+                
+                if (scrollTop + clientHeight >= scrollHeight - 100) {
+                    scrollIndicator.classList.add('at-bottom');
+                } else {
+                    scrollIndicator.classList.remove('at-bottom');
+                }
+            });
+        }
     </script>
 </body>
 </html>
