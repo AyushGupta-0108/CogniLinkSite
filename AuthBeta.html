@@ -114,12 +114,18 @@ body { font-family: Arial, sans-serif; background:#111827; color:white; display:
 </div>
 
 <div class="input-area">
-    <div class="feedback-notice">Please click the feedback button after using the platform. Zoom out page for full view if using in Mobile Browser. </div>
+    <div class="feedback-notice">
+        Please click the feedback button after using the platform. Zoom out page for full view if using in Mobile Browser. <br>
+        <span style="display:block; margin-top:0.25rem;">
+            Currently running entirely on free/open AI models (Llama, Cohere, ByteDance). Premium models will be added over time.
+        </span>
+    </div>
     <div class="input-container">
         <textarea id="inputField" class="input-field" placeholder="Message CogniLink..." rows="1"></textarea>
         <button class="send-btn" id="sendBtn" disabled>▶</button>
     </div>
 </div>
+
 
 <!-- Login notice popup -->
 <div id="loginNoticePopup" style="
