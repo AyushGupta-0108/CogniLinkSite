@@ -155,7 +155,7 @@ body {
   justify-content:flex-start;
   max-width:48rem;
   margin:0 auto;
-  padding:0.75rem 0.25rem 10rem;
+  padding:0.75rem 0.25rem 7rem; /* extra bottom padding so messages never collide with input bar */
 }
 
 /* --- Welcome Screen --- */
@@ -292,8 +292,8 @@ body {
   background:#020617;
   position:sticky;
   bottom:0;
-  z-index:100;
   box-shadow:0 -12px 30px rgba(0,0,0,0.8);
+  z-index:50; /* make sure the bar is always above messages */
 }
 .feedback-notice {
   text-align:left;
@@ -314,7 +314,7 @@ body {
   border:1px solid #1f2937;
   box-shadow:0 12px 30px rgba(0,0,0,0.7);
   transition:border-color 0.18s ease, box-shadow 0.18s ease, transform 0.16s ease;
-  cursor:text;
+  cursor:text; /* indicates the whole bar is focusable */
 }
 .input-container:focus-within {
   border-color:#3b82f6;
@@ -762,5 +762,72 @@ function newChat(){
 }
 
 function addChatToSidebar(chat){
-    var side=document.getElementById('recent
-                                    
+    var side=document.getElementById('recentChats');
+    var div=document.createElement('div');
+    div.className='chat-item';
+    div.textContent='Chat-'+chat.id;
+    div.onclick=function(){loadChat(chat.id)};
+    side.appendChild(div);
+}
+
+function loadChat(id){
+    var chat=chatHistory.find(c=>c.id===id);
+    if(!chat)return;
+    currentChat={id:chat.id,messages:chat.messages.slice()};
+    var c=document.getElementById('messagesContainer'); 
+    c.innerHTML='';
+    currentChat.messages.forEach(m=>addMessage(m.type,m.msg));
+}
+
+var sendBtn=document.getElementById('sendBtn');
+document.getElementById('sendBtn').addEventListener('click',sendMessage);
+document.getElementById('newChatBtn').addEventListener('click',newChat);
+document.getElementById('inputField').addEventListener('keypress',function(e){
+    if(e.key==='Enter'&&!e.shiftKey){ 
+        e.preventDefault(); 
+        sendMessage(); 
+    }
+});
+</script>
+
+<!-- Login notice popup handler + click-anywhere-to-focus on input bar -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const inputField = document.getElementById('inputField');
+  const loginNoticePopup = document.getElementById('loginNoticePopup');
+  const noticeOkBtn = document.getElementById('noticeOkBtn');
+  const inputContainer = document.querySelector('.input-container');
+
+  if (!inputField) { 
+    console.error("inputField not found"); 
+    return; 
+  }
+
+  // Make the whole bar focus the textarea on click (more sensitive)
+  if (inputContainer) {
+    inputContainer.addEventListener('click', (e) => {
+      // If click is on the send button, let its handler run anyway
+      if (e.target && e.target.id === 'sendBtn') return;
+      inputField.focus();
+    });
+  }
+
+  let noticeShown = false;
+
+  inputField.addEventListener('focus', () => {
+    if (!window.isLoggedIn && !noticeShown) {
+      loginNoticePopup.style.display = 'flex';
+      inputField.blur();
+      noticeShown = true;
+    }
+  });
+
+  noticeOkBtn.addEventListener('click', () => {
+    loginNoticePopup.style.display = 'none';
+    inputField.focus();
+  });
+});
+</script>
+
+</body>
+</html>
