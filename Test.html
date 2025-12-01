@@ -155,7 +155,7 @@ body {
   justify-content:flex-start;
   max-width:48rem;
   margin:0 auto;
-  padding:0.75rem 0.25rem 1.25rem;
+  padding:0.75rem 0.25rem 7rem; /* extra bottom padding so messages never collide with input bar */
 }
 
 /* --- Welcome Screen --- */
@@ -361,7 +361,12 @@ body {
   font-size:1.05rem;
   margin-bottom:1rem;
   color:#e5e7eb;
-  animation:pulseGlow 2.2s ease-in-out infinite;
+  text-transform:uppercase;
+  letter-spacing:0.15em;
+  text-align:left;
+  animation:
+    pulseGlow 1.6s ease-in-out infinite,
+    floatY 3s ease-in-out infinite;
 }
 .prompt-category { margin-bottom:1.7rem; }
 .prompt-category h4 {
@@ -408,9 +413,15 @@ body {
     color:#e5e7eb;
   }
   50% {
-    text-shadow:0 0 14px rgba(56,189,248,0.7);
+    text-shadow:
+      0 0 8px rgba(56,189,248,0.9),
+      0 0 18px rgba(59,130,246,0.85);
     color:#f9fafb;
   }
+}
+@keyframes floatY {
+  0%, 100% { transform:translateY(0); }
+  50%      { transform:translateY(-4px); }
 }
 @keyframes amoebaPulse {
   0% {
@@ -686,10 +697,10 @@ function scrollToBottom(){
     var container=document.getElementById('messagesContainer');
     var area=document.getElementById('messagesArea');
     if(container && container.lastElementChild){
-        container.lastElementChild.scrollIntoView({behavior:'smooth', block:'end'});
+        container.lastElementChild.scrollIntoView({behavior:'smooth', block:'center'});
     }
     if(area){
-        area.scrollTop = area.scrollHeight;
+        area.scrollTo({ top: area.scrollHeight, behavior:'smooth' });
     }
 }
 
