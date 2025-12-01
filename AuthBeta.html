@@ -83,10 +83,23 @@ body { font-family: Arial, sans-serif; background:#111827; color:white; display:
 
     <div class="messages-area" id="messagesArea">
         <div class="messages-container" id="messagesContainer">
-            <div class="welcome-screen" id="welcomeScreen">
-                <h2>Welcome to CogniLink AI</h2>
-                <p>How can I assist you today?</p>
-            </div>
+                <div class="welcome-screen" id="welcomeScreen">
+    <h2>Welcome to CogniLink AI</h2>
+    <p>How can I assist you today?</p>
+
+    <p style="
+        margin-top: 1rem;
+        font-size: 0.95rem;
+        color: #9ca3af;
+        max-width: 420px;
+        line-height: 1.5;
+        margin-left: auto;
+        margin-right: auto;
+    ">
+        Currently running entirely on free/open AI models (Llama, Cohere, ByteDance) for research purposes. 
+        Premium models will be added soon.
+    </p>
+</div>
         </div>
     </div>
 
@@ -116,9 +129,6 @@ body { font-family: Arial, sans-serif; background:#111827; color:white; display:
 <div class="input-area">
     <div class="feedback-notice">
         Please click the feedback button after using the platform. Zoom out page for full view if using in Mobile Browser. <br>
-        <span style="display:block; margin-top:0.25rem;">
-            Currently running entirely on free/open AI models (Llama, Cohere, ByteDance). Premium models will be added over time.
-        </span>
     </div>
     <div class="input-container">
         <textarea id="inputField" class="input-field" placeholder="Message CogniLink..." rows="1"></textarea>
