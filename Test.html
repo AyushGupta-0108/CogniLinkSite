@@ -35,8 +35,27 @@ body {
   box-shadow:0 18px 40px rgba(0,0,0,0.7);
 }
 .logo-section { display:flex; align-items:center; gap:0.75rem; }
-.logo-container { width:3rem; height:3rem; border-radius:0.9rem; overflow:hidden; box-shadow:0 10px 25px rgba(0,0,0,0.6); }
-.logo-container img { width:100%; height:100%; object-fit:contain; background:#020617; }
+.logo-container {
+  width:3rem;
+  height:3rem;
+  border-radius:0.9rem;
+  overflow:hidden;
+  box-shadow:0 10px 25px rgba(0,0,0,0.6);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.logo-container img {
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  background:#020617;
+}
+/* Spinning state while answering */
+.logo-container.spin {
+  animation:logoSpin 1.2s linear infinite;
+}
+
 .logo-text { font-size:1.25rem; font-weight:600; display:flex; align-items:center; gap:0.5rem; }
 .beta-pill {
   font-size:0.65rem;
@@ -310,6 +329,7 @@ body {
   font-size:1.05rem;
   margin-bottom:1rem;
   color:#e5e7eb;
+  animation:pulseGlow 2.2s ease-in-out infinite;
 }
 .prompt-category { margin-bottom:1.7rem; }
 .prompt-category h4 {
@@ -345,6 +365,20 @@ body {
 @keyframes floatIn {
   from { opacity:0; transform:translateY(6px) scale(0.98); }
   to { opacity:1; transform:translateY(0) scale(1); }
+}
+@keyframes logoSpin {
+  from { transform:rotate(0deg); }
+  to   { transform:rotate(360deg); }
+}
+@keyframes pulseGlow {
+  0%, 100% {
+    text-shadow:0 0 0 rgba(56,189,248,0.0);
+    color:#e5e7eb;
+  }
+  50% {
+    text-shadow:0 0 14px rgba(56,189,248,0.7);
+    color:#f9fafb;
+  }
 }
 
 /* --- Responsive --- */
@@ -541,6 +575,13 @@ var chatHistory=[];
 var currentChat={id:null,messages:[]};
 var chatCounter=1;
 
+function setLogoSpinning(spin){
+  var logo=document.querySelector('.logo-container');
+  if(!logo) return;
+  if(spin) logo.classList.add('spin');
+  else logo.classList.remove('spin');
+}
+
 function addMessage(type,content){
     if(!currentChat.messages)currentChat.messages=[];
     currentChat.messages.push({type:type,msg:content});
@@ -572,9 +613,15 @@ function removeLoadingMessage(){
     if(l)l.remove(); 
 }
 
-function scrollToBottom(){ 
-    var area=document.getElementById('messagesArea'); 
-    area.scrollTop=area.scrollHeight; 
+function scrollToBottom(){
+    var container=document.getElementById('messagesContainer');
+    var area=document.getElementById('messagesArea');
+    if(container && container.lastElementChild){
+        container.lastElementChild.scrollIntoView({behavior:'smooth', block:'end'});
+    }
+    if(area){
+        area.scrollTop = area.scrollHeight;
+    }
 }
 
 function sendMessage(){
@@ -587,6 +634,7 @@ function sendMessage(){
     input.value='';
     isLoading=true;
     sendBtn.disabled=true;
+    setLogoSpinning(true);
     addLoadingMessage();
     
     fetch('https://hook.eu2.make.com/evryrofrqq9lvnp8dl9mopx2vqw8bonn',{
@@ -598,11 +646,13 @@ function sendMessage(){
         addMessage('ai',data);
         isLoading=false; 
         sendBtn.disabled=false;
+        setLogoSpinning(false);
     }).catch(()=>{
         removeLoadingMessage();
         addMessage('ai','Sorry, there was an error. Please try again.');
         isLoading=false; 
         sendBtn.disabled=false;
+        setLogoSpinning(false);
     });
 }
 
@@ -629,6 +679,7 @@ function newChat(){
         '</div>' +
       '</div>';
     document.getElementById('inputField').value='';
+    scrollToBottom();
 }
 
 function addChatToSidebar(chat){
@@ -649,6 +700,7 @@ function loadChat(id){
     currentChat.messages.forEach(m=>addMessage(m.type,m.msg));
 }
 
+var sendBtn=document.getElementById('sendBtn');
 document.getElementById('sendBtn').addEventListener('click',sendMessage);
 document.getElementById('newChatBtn').addEventListener('click',newChat);
 document.getElementById('inputField').addEventListener('keypress',function(e){
