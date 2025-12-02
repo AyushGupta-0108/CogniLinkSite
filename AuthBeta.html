@@ -257,22 +257,28 @@ body {
 }
 
 .loading-logo-wrap {
-  width:28px;
-  height:28px;
-  border-radius:999px;
-  overflow:hidden;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:rgba(15,23,42,0.95);
-  box-shadow:0 0 16px rgba(59,130,246,0.95);
-  animation:logoSpin 0.9s linear infinite;
+  width: 40px;              /* size of the circle */
+  height: 40px;
+  aspect-ratio: 1 / 1;      /* force it to stay perfectly round */
+  border-radius: 50%;       /* makes it a circle */
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(15,23,42,0.95);  /* black-ish background */
+  box-shadow: 0 0 16px rgba(59,130,246,0.95);
+
+  animation: logoSpin 0.9s linear infinite;
 }
+
 .loading-logo-wrap img {
-  width:130%;
-  height:130%;
-  object-fit:contain;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
+
 
 .loading-text {
   color:#e5e7eb;
@@ -522,16 +528,16 @@ body {
             <div class="prompt-item" onclick="sendPrompt('Create an image of a cat.')">
                 Create an image of a cat.
             </div>
-            <div class="prompt-item" onclick="sendPrompt('Who founded this platform?')">
-                Who founded this platform?
+            <div class="prompt-item" onclick="sendPrompt('Give information about the founder of this system.')">
+                Give information about the founder of this system..
             </div>
         </div>
         <div class="prompt-category">
             <h4>Complex Tasks</h4>
-            <div class="prompt-item" onclick="sendPrompt('Write a humorous advertisement for a time-traveling toaster, code a small HTML page to display the ad, and generate an image of the toaster in action.')">
+            <div class="prompt-item" onclick="sendPrompt('ello. What is the currency of Japan. Code a small HTML page to print a random letter. Generate an image of the toaster in action.')">
                 Hello. What is the currency of Japan. Code a small HTML page to print a random letter. Generate an image of the toaster in action.
             </div>
-            <div class="prompt-item" onclick="sendPrompt('Create a short story about a robot exploring a fantasy world, and generate a Python function that prints a map of the world. Also, visualize one scene from the story.')">
+            <div class="prompt-item" onclick="sendPrompt('Create a short story about a robot exploring a fantasy world, and generate a Python function that prints a map of the world. Write an resignation email to my boss.')">
                 Create a short story about a robot exploring a fantasy world, and generate a Python function that prints a map of the world. Write an resignation email to my boss.
             </div>
             <div class="prompt-item" onclick="sendPrompt('Describe a superhero with a quirky superpower. Create a JavaScript function that reverses a string. Generate an image of a sunset over a futuristic city.')">
@@ -719,7 +725,7 @@ function sendMessage(){
     sendBtn.disabled=true;
     addLoadingMessage();
     
-    fetch('https://hook.eu2.make.com/evryrofrqq9lvnp8dl9mopx2vqw8bonn',{
+    fetch('https://hook.eu2.make.com/5xphrd7k2z9ngmi1vijlfpxy02me5u3t',{
         method:'POST', 
         headers:{'Content-Type':'application/json'}, 
         body:JSON.stringify({message:msg})
