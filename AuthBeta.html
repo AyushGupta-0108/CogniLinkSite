@@ -1,10 +1,41 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CogniLink AI Platform</title>
+
+<!-- Primary Meta Tags -->
+<title>CogniLink AI Platform - Try AI Orchestration Beta</title>
+<meta name="title" content="CogniLink AI Platform - Try AI Orchestration Beta">
+<meta name="description" content="Experience CogniLink AI's intelligent orchestration platform. Use multiple specialized AI engines for code, images, and writing - all in one place.">
+<meta name="keywords" content="CogniLink AI, AI platform, AI orchestration, multi AI tool, AI chat, AI assistant">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://cognilink.online/AuthBeta.html">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cognilink.online/AuthBeta.html">
+<meta property="og:title" content="CogniLink AI Platform - AI Orchestration Beta">
+<meta property="og:description" content="Experience intelligent AI orchestration. Multiple specialized AI engines working together.">
+<meta property="og:image" content="https://cognilink.online/LogoNoBackground.png">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://cognilink.online/AuthBeta.html">
+<meta property="twitter:title" content="CogniLink AI Platform - AI Orchestration Beta">
+<meta property="twitter:description" content="Experience intelligent AI orchestration. Multiple specialized AI engines working together.">
+<meta property="twitter:image" content="https://cognilink.online/LogoNoBackground.png">
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1401GVEYWR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-1401GVEYWR', {
+    page_path: '/AuthBeta.html'
+  });
+</script>
+
 <style>
 /* --- Global / Layout --- */
 * { margin:0; padding:0; box-sizing:border-box; }
@@ -156,7 +187,7 @@ body {
   justify-content:flex-start;
   max-width:48rem;
   margin:0 auto;
-  padding:0.75rem 0.25rem 7rem; /* extra bottom padding so messages never collide with input bar */
+  padding:0.75rem 0.25rem 7rem;
 }
 
 /* --- Welcome Screen --- */
@@ -236,7 +267,7 @@ body {
   color:#f3f4f6;
 }
 
-/* --- Loading state: Amoeba with spinning logo --- */
+/* --- Loading state --- */
 .loading-message { display:flex; align-items:center; }
 
 .loading-card {
@@ -247,7 +278,6 @@ body {
     0 0 30px rgba(56,189,248,0.9),
     0 18px 45px rgba(0,0,0,0.9);
   border:1px solid rgba(15,23,42,0.95);
- /* animation:amoebaPulse 1.3s ease-in-out infinite; */
 }
 
 .loading-inner {
@@ -259,28 +289,22 @@ body {
 .loading-logo-wrap {
   width: 40px;
   height: 40px;
-  aspect-ratio: 1 / 1;      /* always 1:1 = circle */
-  border-radius: 50%;       /* makes it a circle */
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
   overflow: hidden;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   background: rgba(15,23,42,0.95);
   box-shadow: 0 0 16px rgba(59,130,246,0.95);
-
   animation: logoSpin 0.9s linear infinite;
 }
-
 
 .loading-logo-wrap img {
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
-
-
 
 .loading-text {
   color:#e5e7eb;
@@ -302,7 +326,7 @@ body {
   position:sticky;
   bottom:0;
   box-shadow:0 -12px 30px rgba(0,0,0,0.8);
-  z-index:50; /* make sure the bar is always above messages */
+  z-index:50;
 }
 .feedback-notice {
   text-align:left;
@@ -323,7 +347,7 @@ body {
   border:1px solid #1f2937;
   box-shadow:0 12px 30px rgba(0,0,0,0.7);
   transition:border-color 0.18s ease, box-shadow 0.18s ease, transform 0.16s ease;
-  cursor:text; /* indicates the whole bar is focusable */
+  cursor:text;
 }
 .input-container:focus-within {
   border-color:#3b82f6;
@@ -360,7 +384,7 @@ body {
 }
 .send-btn:disabled { background:#374151; cursor:not-allowed; box-shadow:none; transform:none; }
 
-/* --- Right Sidebar: Prompt suggestions --- */
+/* --- Right Sidebar --- */
 .sidebar {
   width:280px;
   background:radial-gradient(circle at top, #020617 0, #020617 45%, #020617 100%);
@@ -434,32 +458,6 @@ body {
   0%, 100% { transform:translateY(0); }
   50%      { transform:translateY(-4px); }
 }
-@keyframes amoebaPulse {
-  0% {
-    transform:scale(0.97) translateX(0);
-    border-radius:18px;
-    box-shadow:
-      0 0 0 1px rgba(37,99,235,0.7),
-      0 0 18px rgba(56,189,248,0.75),
-      0 10px 32px rgba(0,0,0,0.85);
-  }
-  50% {
-    transform:scale(1.04) translateX(2px);
-    border-radius:24px;
-    box-shadow:
-      0 0 0 1px rgba(59,130,246,1),
-      0 0 32px rgba(56,189,248,1),
-      0 18px 45px rgba(0,0,0,0.95);
-  }
-  100% {
-    transform:scale(0.97) translateX(0);
-    border-radius:18px;
-    box-shadow:
-      0 0 0 1px rgba(37,99,235,0.7),
-      0 0 18px rgba(56,189,248,0.75),
-      0 10px 32px rgba(0,0,0,0.85);
-  }
-}
 @keyframes textPulse {
   0%, 100% {
     opacity:0.75;
@@ -486,7 +484,7 @@ body {
 <div class="header">
     <div class="logo-section">
         <div class="logo-container">
-            <img src="https://ik.imagekit.io/pgus2c0zx/LogoNoBackground.png" alt="CogniLink Logo">
+            <img src="https://ik.imagekit.io/pgus2c0zx/LogoNoBackground.png" alt="CogniLink AI Logo">
         </div>
         <span class="logo-text">CogniLink <span class="beta-pill">beta</span></span>
     </div>
@@ -536,7 +534,7 @@ body {
         </div>
         <div class="prompt-category">
             <h4>Complex Tasks</h4>
-            <div class="prompt-item" onclick="sendPrompt('ello. What is the currency of Japan. Code a small HTML page to print a random letter. Generate an image of the toaster in action.')">
+            <div class="prompt-item" onclick="sendPrompt('Hello. What is the currency of Japan. Code a small HTML page to print a random letter. Generate an image of the toaster in action.')">
                 Hello. What is the currency of Japan. Code a small HTML page to print a random letter. Generate an image of the toaster in action.
             </div>
             <div class="prompt-item" onclick="sendPrompt('Create a short story about a robot exploring a fantasy world, and generate a Python function that prints a map of the world. Write an resignation email to my boss.')">
@@ -559,7 +557,6 @@ body {
     </div>
 </div>
 
-<!-- Login notice popup -->
 <div id="loginNoticePopup" style="
     display:none;
     position:fixed;
@@ -580,7 +577,6 @@ body {
   </div>
 </div>
 
-<!-- Firebase Scripts -->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-app.js";
   import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-analytics.js";
@@ -658,7 +654,6 @@ body {
   window.logout = () => signOut(auth).then(()=>console.log("Logged out"));
 </script>
 
-<!-- Chat functionality script -->
 <script>
 var isLoading=false;
 var chatHistory=[];
@@ -799,7 +794,6 @@ document.getElementById('inputField').addEventListener('keypress',function(e){
 });
 </script>
 
-<!-- Login notice popup handler + click-anywhere-to-focus on input bar -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const inputField = document.getElementById('inputField');
@@ -812,10 +806,8 @@ document.addEventListener("DOMContentLoaded", () => {
     return; 
   }
 
-  // Make the whole bar focus the textarea on click (more sensitive)
   if (inputContainer) {
     inputContainer.addEventListener('click', (e) => {
-      // If click is on the send button, let its handler run anyway
       if (e.target && e.target.id === 'sendBtn') return;
       inputField.focus();
     });
