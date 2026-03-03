@@ -680,14 +680,90 @@ body::after {
   to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-/* ─── Responsive ─── */
-@media (max-width: 1100px) { .sidebar-left { display: none; } }
-@media (max-width: 768px)  {
-  .sidebar-right { display: none; }
-  .header { padding: 0.6rem 1rem; }
-  .messages-scroll { padding: 1.2rem 0.5rem 0; }
+/* ─── MOBILE FIXES ─── */
+
+html { height: 100%; }
+body {
+  height: 100vh;
+  height: 100dvh; /* fallback for older browsers */
+  overflow: hidden;
 }
-@media (max-width: 480px)  { .welcome h2 { font-size: 1.35rem; } }
+.layout { min-height: 0; }
+
+.input-zone {
+  padding-bottom: calc(0.7rem + env(safe-area-inset-bottom, 0px));
+}
+
+/* Mobile prompt chips strip */
+.mobile-prompts {
+  display: none;
+  flex-shrink: 0;
+  padding: 0.5rem 0.75rem;
+  border-top: 1px solid var(--border);
+  background: var(--bg);
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  white-space: nowrap;
+  gap: 0.4rem;
+}
+.mobile-prompts::-webkit-scrollbar { display: none; }
+.mobile-prompt-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.38rem 0.7rem;
+  background: rgba(37,99,235,0.1);
+  border: 1px solid rgba(59,130,246,0.25);
+  border-radius: 99px;
+  font-size: 0.75rem;
+  color: var(--text-sub);
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.15s, transform 0.12s;
+  font-family: 'DM Sans', sans-serif;
+}
+.mobile-prompt-chip:active {
+  background: rgba(37,99,235,0.22);
+  border-color: rgba(59,130,246,0.5);
+  color: var(--text);
+  transform: scale(0.96);
+}
+
+/* Tablet — hide left sidebar */
+@media (max-width: 1100px) {
+  .sidebar-left { display: none; }
+}
+
+/* Mobile — core layout fixes */
+@media (max-width: 768px) {
+  .sidebar-right { display: none; }       /* ✅ correct class */
+  .mobile-prompts { display: flex; }
+  .input-hint { display: none; }          /* save vertical space */
+  .header { padding: 0.6rem 0.85rem; }
+  .messages-scroll { padding: 1rem 0.6rem 0; }
+  .messages-inner { padding-bottom: 1rem; }
+  .welcome { padding: 2rem 0.75rem 1.5rem; }
+  .welcome h2 { font-size: 1.3rem; }
+  .info-card { max-width: 100%; }
+  .msg-body { max-width: 85%; }
+
+  /* ✅ Prevent iOS Safari from zooming in when tapping the textarea */
+  .msg-input { font-size: 16px !important; }
+}
+
+/* Small phones — shrink header buttons to icon-only */
+@media (max-width: 460px) {
+  .header-btn span,
+  .header-btn svg + * { display: none; }   /* hide text labels */
+  .header-btn { padding: 0.4rem 0.5rem; min-width: 2.1rem; justify-content: center; }
+  .logo-name { font-size: 0.95rem; }
+  .logo-ring { width: 2.1rem; height: 2.1rem; }
+  .header-btn { gap: 0; }
+}
 </style>
 </head>
 <body>
@@ -703,15 +779,15 @@ body::after {
   <div class="header-right">
     <a href="https://docs.google.com/forms/d/e/1FAIpQLSdaHARPxlD0MeFM4G5__Q7K22HVWYaPh_wfJ1pvGV-AdJv9Bw/viewform?usp=header" target="_blank" class="header-btn">
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-      Feedback
+      <span> Feedback</span>
     </a>
     <button class="header-btn" id="newChatBtn">
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-      New Chat
+       <span>New Chat</span>
     </button>
     <button class="header-btn primary" id="loginBtn">
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
-      Login
+      <span>Login</span>
     </button>
   </div>
 </header>
@@ -743,7 +819,15 @@ body::after {
         </div>
       </div>
     </div>
-
+<!-- Mobile prompt chips (horizontal scroll) -->
+<div class="mobile-prompts" id="mobilePrompts">
+  <div class="mobile-prompt-chip" onclick="sendPrompt('Generate a small python code that prints a random number.')">🐍 Python snippet</div>
+  <div class="mobile-prompt-chip" onclick="sendPrompt('Create an image of a cat.')">🖼️ Cat image</div>
+  <div class="mobile-prompt-chip" onclick="sendPrompt('Give information about CogniLink AI and its founder.')">ℹ️ About CogniLink</div>
+  <div class="mobile-prompt-chip" onclick="sendPrompt('Hello. What is the currency of Japan. Code a small HTML page to print a random letter. Generate an image of the toaster in action.')">⚡ Multi-task</div>
+  <div class="mobile-prompt-chip" onclick="sendPrompt('Describe a superhero with a quirky superpower. Create a JavaScript function that reverses a string. Generate an image of a sunset over a futuristic city.')">🦸 Hero + JS + Art</div>
+  <div class="mobile-prompt-chip" onclick="sendPrompt('Create a short story about a robot exploring a fantasy world, and generate a Python function that prints a map of the world. Write an resignation email to my boss.')">📝 Story + Email</div>
+</div>
     <!-- Input Zone -->
     <div class="input-zone">
       <p class="input-hint">Share feedback after using · Zoom out on mobile for best experience</p>
