@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Primary Meta Tags -->
+<title>CogniLink AI Platform - Try AI Orchestration Beta</title>
+<meta name="title" content="CogniLink AI Platform - Try AI Orchestration Beta">
+<meta name="description" content="Experience CogniLink AI's intelligent orchestration platform. Use multiple specialized AI engines for code, images, and writing - all in one place.">
+<meta name="keywords" content="CogniLink AI, AI platform, AI orchestration, multi AI tool, AI chat, AI assistant">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://cognilink.online/AuthBeta.html">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://cognilink.online/AuthBeta.html">
+<meta property="og:title" content="CogniLink AI Platform - AI Orchestration Beta">
+<meta property="og:description" content="Experience intelligent AI orchestration. Multiple specialized AI engines working together.">
+<meta property="og:image" content="https://cognilink.online/LogoNoBackground.png">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://cognilink.online/AuthBeta.html">
+<meta property="twitter:title" content="CogniLink AI Platform - AI Orchestration Beta">
+<meta property="twitter:description" content="Experience intelligent AI orchestration. Multiple specialized AI engines working together.">
+<meta property="twitter:image" content="https://cognilink.online/LogoNoBackground.png">
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1401GVEYWR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-1401GVEYWR', {
+    page_path: '/AuthBeta.html'
+  });
+</script>
+
+<style>
+/* --- Global / Layout --- */
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: Arial, sans-serif;
+  background:#020617;
+  background-image:
+    radial-gradient(circle at 0% 0%, rgba(37,99,235,0.35) 0, transparent 45%),
+    radial-gradient(circle at 100% 100%, rgba(56,189,248,0.18) 0, transparent 50%),
+    linear-gradient(180deg, #020617 0%, #020617 40%, #020617 100%);
+  color:white;
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
+}
+
+/* --- Header --- */
+.header {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0.8rem 1.5rem;
+  border-bottom:1px solid #1f2937;
+  background:rgba(15,23,42,0.92);
+  backdrop-filter:blur(14px);
+  position:sticky;
+  top:0;
+  z-index:10;
+  box-shadow:0 18px 40px rgba(0,0,0,0.7);
+}
+.logo-section { display:flex; align-items:center; gap:0.75rem; }
+.logo-container {
+  width:3rem;
+  height:3rem;
+  border-radius:0.9rem;
+  overflow:hidden;
+  box-shadow:0 10px 25px rgba(0,0,0,0.6);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.logo-container img {
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  background:#020617;
+}
+.logo-text { font-size:1.25rem; font-weight:600; display:flex; align-items:center; gap:0.5rem; }
+.beta-pill {
+  font-size:0.65rem;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  padding:0.2rem 0.45rem;
+  border-radius:999px;
+  background:rgba(37,99,235,0.2);
+  border:1px solid rgba(59,130,246,0.6);
+  color:#bfdbfe;
+}
+
+.header-buttons { display:flex; gap:0.75rem; }
+.new-chat-btn, .feedback-btn {
+  display:flex; align-items:center; gap:0.5rem;
+  padding:0.45rem 0.9rem;
+  background:#020617;
+  border:1px solid #1f2937;
+  border-radius:999px;
+  color:white;
+  cursor:pointer;
+  text-decoration:none;
+  font-size:0.9rem;
+  transition:background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.new-chat-btn:hover, .feedback-btn:hover {
+  background:#111827;
+  border-color:#2563eb;
+  transform:translateY(-1px);
+  box-shadow:0 10px 25px rgba(37,99,235,0.45);
+}
+
+/* --- Main Content Layout --- */
+.main-content {
+  flex:1;
+  display:flex;
+  min-height:0;
+  overflow:hidden;
+}
+
+/* --- Left Sidebar: Recent Chats --- */
+.recent-chats {
+  width:220px;
+  background:radial-gradient(circle at top, #020617 0, #020617 40%, #020617 100%);
+  border-right:1px solid #1f2937;
+  padding:1rem;
+  overflow-y:auto;
+  box-shadow:inset -1px 0 0 rgba(15,23,42,0.9);
+}
+.recent-chats h3 {
+  font-size:1.05rem;
+  margin-bottom:0.9rem;
+  color:#9ca3af;
+  text-transform:uppercase;
+  letter-spacing:0.06em;
+}
+.chat-item {
+  background:#111827;
+  margin-bottom:0.5rem;
+  padding:0.55rem 0.9rem;
+  border-radius:0.6rem;
+  cursor:pointer;
+  font-size:0.85rem;
+  color:#e5e7eb;
+  border:1px solid rgba(55,65,81,0.85);
+  transition:background 0.18s ease, transform 0.16s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+.chat-item:hover {
+  background:#111827;
+  border-color:#3b82f6;
+  transform:translateY(-1px);
+  box-shadow:0 10px 22px rgba(0,0,0,0.7);
+}
+
+/* --- Messages Area --- */
+.messages-area {
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  padding:1.5rem 1rem;
+  overflow-y:auto;
+  position:relative;
+}
+.messages-area::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at top, rgba(37,99,235,0.18) 0, transparent 55%),
+    radial-gradient(circle at bottom, rgba(56,189,248,0.12) 0, transparent 50%);
+  opacity:0.9;
+}
+
+.messages-container {
+  position:relative;
+  z-index:1;
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  max-width:48rem;
+  margin:0 auto;
+  padding:0.75rem 0.25rem 7rem;
+}
+
+/* --- Welcome Screen --- */
+.welcome-screen {
+  text-align:center;
+  color:#9ca3af;
+  margin-top:5rem;
+  animation:fadeUp 0.45s ease-out;
+}
+.welcome-screen h2 {
+  font-size:1.9rem;
+  font-weight:700;
+  margin-bottom:0.6rem;
+  color:#e5e7eb;
+}
+.welcome-screen p.subtitle {
+  font-size:1.05rem;
+  margin-bottom:0.6rem;
+}
+
+.info-box {
+  margin-top:1.3rem;
+  background:#020617;
+  border:1px solid #1f2937;
+  border-left:3px solid #3b82f6;
+  padding:0.9rem 1.1rem;
+  border-radius:0.9rem;
+  max-width:460px;
+  margin-left:auto;
+  margin-right:auto;
+  color:#d1d5db;
+  font-size:0.9rem;
+  line-height:1.55;
+  box-shadow:0 14px 35px rgba(0,0,0,0.75);
+  display:flex;
+  gap:0.7rem;
+  align-items:flex-start;
+}
+.info-icon {
+  flex-shrink:0;
+  width:24px;
+  height:24px;
+  border-radius:999px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:0.9rem;
+  background:rgba(37,99,235,0.22);
+  color:#60a5fa;
+  box-shadow:0 0 10px rgba(59,130,246,0.45);
+}
+.info-text { text-align:left; }
+
+/* --- Messages --- */
+.message {
+  display:flex;
+  margin-bottom:1.3rem;
+  animation:floatIn 0.22s ease-out;
+}
+.message.user { justify-content:flex-end; }
+.message.ai { justify-content:flex-start; }
+.message-content {
+  max-width:80%;
+  padding:0.9rem 1.35rem;
+  border-radius:1rem;
+  white-space:pre-wrap;
+  word-break:break-word;
+  box-shadow:0 12px 30px rgba(0,0,0,0.75);
+  border:1px solid rgba(31,41,55,0.9);
+}
+.message.user .message-content {
+  background:linear-gradient(135deg, #2563eb, #1d4ed8);
+  color:white;
+}
+.message.ai .message-content {
+  background:rgba(15,23,42,0.98);
+  color:#f3f4f6;
+}
+
+/* --- Loading state --- */
+.loading-message { display:flex; align-items:center; }
+
+.loading-card {
+  background:radial-gradient(circle at top left, rgba(59,130,246,0.6) 0, rgba(15,23,42,0.95) 40%, #020617 100%);
+  border-radius:1.3rem;
+  box-shadow:
+    0 0 0 1px rgba(37,99,235,0.9),
+    0 0 30px rgba(56,189,248,0.9),
+    0 18px 45px rgba(0,0,0,0.9);
+  border:1px solid rgba(15,23,42,0.95);
+}
+
+.loading-inner {
+  display:flex;
+  align-items:center;
+  gap:0.75rem;
+}
+
+.loading-logo-wrap {
+  width: 40px;
+  height: 40px;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15,23,42,0.95);
+  box-shadow: 0 0 16px rgba(59,130,246,0.95);
+  animation: logoSpin 0.9s linear infinite;
+}
+
+.loading-logo-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.loading-text {
+  color:#e5e7eb;
+  font-size:0.9rem;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  animation:textPulse 1.3s ease-in-out infinite;
+}
+
+/* --- Input Area --- */
+.input-area {
+  border-top:1px solid #1f2937;
+  padding:0.9rem 1rem 1rem;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:0.5rem;
+  background:#020617;
+  position:sticky;
+  bottom:0;
+  box-shadow:0 -12px 30px rgba(0,0,0,0.8);
+  z-index:50;
+}
+.feedback-notice {
+  text-align:left;
+  font-size:0.8rem;
+  color:#6b7280;
+  max-width:48rem;
+  width:100%;
+}
+.input-container {
+  width:100%;
+  max-width:48rem;
+  display:flex;
+  align-items:flex-end;
+  gap:0.75rem;
+  background:#020617;
+  border-radius:1rem;
+  padding:0.7rem 1rem;
+  border:1px solid #1f2937;
+  box-shadow:0 12px 30px rgba(0,0,0,0.7);
+  transition:border-color 0.18s ease, box-shadow 0.18s ease, transform 0.16s ease;
+  cursor:text;
+}
+.input-container:focus-within {
+  border-color:#3b82f6;
+  box-shadow:0 0 0 1px rgba(59,130,246,0.6), 0 18px 40px rgba(0,0,0,0.85);
+  transform:translateY(-1px);
+}
+.input-field {
+  flex:1;
+  background:transparent;
+  border:none;
+  outline:none;
+  color:white;
+  resize:none;
+  max-height:8rem;
+  font-family:inherit;
+  font-size:1rem;
+}
+.input-field::placeholder { color:#6b7280; }
+.send-btn {
+  padding:0.5rem 0.65rem;
+  background:#2563eb;
+  border:none;
+  border-radius:0.6rem;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:background 0.18s ease, transform 0.16s ease, box-shadow 0.18s ease;
+}
+.send-btn:hover:not(:disabled) {
+  background:#1d4ed8;
+  transform:translateY(-1px) scale(1.03);
+  box-shadow:0 10px 25px rgba(37,99,235,0.55);
+}
+.send-btn:disabled { background:#374151; cursor:not-allowed; box-shadow:none; transform:none; }
+
+/* --- Right Sidebar --- */
+.sidebar {
+  width:280px;
+  background:radial-gradient(circle at top, #020617 0, #020617 45%, #020617 100%);
+  border-left:1px solid #1f2937;
+  padding:1.4rem 1.3rem 1.5rem;
+  overflow-y:auto;
+}
+.sidebar h3 {
+  font-size:1.05rem;
+  margin-bottom:1rem;
+  color:#e5e7eb;
+  text-transform:uppercase;
+  letter-spacing:0.15em;
+  text-align:left;
+  animation:
+    pulseGlow 1.6s ease-in-out infinite,
+    floatY 3s ease-in-out infinite;
+}
+.prompt-category { margin-bottom:1.7rem; }
+.prompt-category h4 {
+  font-size:0.8rem;
+  color:#6b7280;
+  text-transform:uppercase;
+  margin-bottom:0.75rem;
+  letter-spacing:0.08em;
+}
+.prompt-item {
+  background:#111827;
+  padding:0.75rem;
+  border-radius:0.7rem;
+  margin-bottom:0.55rem;
+  cursor:pointer;
+  font-size:0.85rem;
+  line-height:1.4;
+  border:1px solid rgba(55,65,81,0.9);
+  transition:background 0.18s ease, transform 0.16s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+.prompt-item:hover {
+  background:#020617;
+  border-color:#38bdf8;
+  transform:translateY(-1px) translateX(2px);
+  box-shadow:0 14px 30px rgba(0,0,0,0.8);
+}
+
+/* --- Animations --- */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(8px); }
+  to { opacity:1; transform:translateY(0); }
+}
+@keyframes floatIn {
+  from { opacity:0; transform:translateY(6px) scale(0.98); }
+  to { opacity:1; transform:translateY(0) scale(1); }
+}
+@keyframes logoSpin {
+  from { transform:rotate(0deg); }
+  to   { transform:rotate(360deg); }
+}
+@keyframes pulseGlow {
+  0%, 100% {
+    text-shadow:0 0 0 rgba(56,189,248,0.0);
+    color:#e5e7eb;
+  }
+  50% {
+    text-shadow:
+      0 0 8px rgba(56,189,248,0.9),
+      0 0 18px rgba(59,130,246,0.85);
+    color:#f9fafb;
+  }
+}
+@keyframes floatY {
+  0%, 100% { transform:translateY(0); }
+  50%      { transform:translateY(-4px); }
+}
+@keyframes textPulse {
+  0%, 100% {
+    opacity:0.75;
+    text-shadow:0 0 0 rgba(191,219,254,0.0);
+  }
+  50% {
+    opacity:1;
+    text-shadow:0 0 14px rgba(191,219,254,1);
+  }
+}
+
+/* --- Responsive --- */
+@media (max-width:1200px) {
+  .recent-chats { display:none; }
+}
+@media (max-width:768px) {
+  .sidebar { display:none; }
+  .header { padding:0.7rem 1rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+    <div class="logo-section">
+        <div class="logo-container">
+            <img src="https://ik.imagekit.io/pgus2c0zx/LogoNoBackground.png" alt="CogniLink AI Logo">
+        </div>
+        <span class="logo-text">CogniLink <span class="beta-pill">beta</span></span>
+    </div>
+    <div class="header-buttons">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdaHARPxlD0MeFM4G5__Q7K22HVWYaPh_wfJ1pvGV-AdJv9Bw/viewform?usp=header" target="_blank" class="feedback-btn">
+            <span>📝 Feedback</span>
+        </a>
+        <button class="new-chat-btn" id="newChatBtn"><span>➕ New Chat</span></button>
+        <button class="new-chat-btn" id="loginBtn"><span>🔑 Login</span></button>
+    </div>
+</div>
+
+<div class="main-content">
+    <div class="recent-chats" id="recentChats">
+        <h3>Recent Chats</h3>
+    </div>
+
+    <div class="messages-area" id="messagesArea">
+        <div class="messages-container" id="messagesContainer">
+            <div class="welcome-screen" id="welcomeScreen">
+                <h2>Welcome to CogniLink AI</h2>
+                <p class="subtitle">How can I assist you today?</p>
+                <div class="info-box">
+                    <div class="info-icon">ℹ️</div>
+                    <div class="info-text">
+                        Currently running entirely on free/open AI models (Llama, Cohere, ByteDance) for research purposes.
+                        Premium models will be added soon.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="sidebar">
+        <h3>Try asking?</h3>
+        <div class="prompt-category">
+            <h4>Simple Tasks</h4>
+            <div class="prompt-item" onclick="sendPrompt('Generate a small python code that prints a random number.')">
+               Generate a small python code that prints a random number.
+            </div>
+            <div class="prompt-item" onclick="sendPrompt('Create an image of a cat.')">
+                Create an image of a cat.
+            </div>
+            <div class="prompt-item" onclick="sendPrompt('Give information about CogniLink AI and its founder.')">
+                Give information about CogniLink AI and its founder.
+            </div>
+        </div>
+        <div class="prompt-category">
+            <h4>Complex Tasks</h4>
+            <div class="prompt-item" onclick="sendPrompt('Hello. What is the currency of Japan. Code a small HTML page to print a random letter. Generate an image of the toaster in action.')">
+                Hello. What is the currency of Japan. Code a small HTML page to print a random letter. Generate an image of the toaster in action.
+            </div>
+            <div class="prompt-item" onclick="sendPrompt('Create a short story about a robot exploring a fantasy world, and generate a Python function that prints a map of the world. Write an resignation email to my boss.')">
+                Create a short story about a robot exploring a fantasy world, and generate a Python function that prints a map of the world. Write an resignation email to my boss.
+            </div>
+            <div class="prompt-item" onclick="sendPrompt('Describe a superhero with a quirky superpower. Create a JavaScript function that reverses a string. Generate an image of a sunset over a futuristic city.')">
+                Describe a superhero with a quirky superpower. Create a JavaScript function that reverses a string. Generate an image of a sunset.
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="input-area">
+    <div class="feedback-notice">
+        Please click the feedback button after using the platform. Zoom out page for full view if using in Mobile Browser.
+    </div>
+    <div class="input-container">
+        <textarea id="inputField" class="input-field" placeholder="Message CogniLink..." rows="1"></textarea>
+        <button class="send-btn" id="sendBtn" disabled>▶</button>
+    </div>
+</div>
+
+<div id="loginNoticePopup" style="
+    display:none;
+    position:fixed;
+    top:0; left:0; width:100%; height:100%;
+    background:rgba(0,0,0,0.6);
+    justify-content:center; align-items:center;
+    z-index:10000;
+">
+  <div style="
+      background:#1f2937; color:white; padding:2rem; border-radius:1rem;
+      text-align:center; max-width:400px; width:90%;
+  ">
+    <h2 style="margin:0 0 1rem;">⚠️ Please login to use. Login Button is at upper right corner.</h2>
+    <button id="noticeOkBtn" style="
+        margin-top:1rem; padding:0.5rem 1rem; background:#2563eb; color:white;
+        border:none; border-radius:0.5rem; cursor:pointer;
+    ">OK</button>
+  </div>
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-analytics.js";
+  import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged, updateProfile } from "https://www.gstatic.com/firebasejs/10.3.0/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAehpDu97VYZiW3Gs39wliUzrfLMDiQByw",
+    authDomain: "cognilink-ai.firebaseapp.com",
+    projectId: "cognilink-ai",
+    storageBucket: "cognilink-ai.firebasestorage.app",
+    messagingSenderId: "768063000383",
+    appId: "1:768063000383:web:6dea8d546752c2a746cd8a",
+    measurementId: "G-Z2WDYG9PDM"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const auth = getAuth(app);
+  const provider = new GoogleAuthProvider();
+
+  provider.addScope('profile');
+  provider.addScope('email');
+
+  window.auth = auth;
+  window.provider = provider;
+  window.isLoggedIn = false;
+
+  const loginBtn = document.getElementById('loginBtn');
+  const sendBtn = document.getElementById('sendBtn');
+
+  if (loginBtn) {
+    loginBtn.addEventListener('click', async () => {
+      try { 
+        const result = await signInWithPopup(auth, provider);
+        console.log('Login successful:', result.user.email);
+      }
+      catch(e){ 
+        console.error('Login error:', e);
+        alert("Login failed: " + e.message); 
+      }
+    });
+  }
+
+  onAuthStateChanged(auth, async (user) => {
+    window.isLoggedIn = !!user;
+    
+    if(user){
+      if (!user.displayName) {
+        try {
+          const providerData = user.providerData[0];
+          if (providerData && providerData.displayName) {
+            await updateProfile(user, {
+              displayName: providerData.displayName,
+              photoURL: providerData.photoURL || user.photoURL
+            });
+          } else if (user.email) {
+            const emailName = user.email.split('@')[0];
+            await updateProfile(user, {
+              displayName: emailName
+            });
+          }
+        } catch (error) {
+          console.error('Error updating profile:', error);
+        }
+      }
+      
+      if(loginBtn) loginBtn.style.display='none';
+      if(sendBtn) sendBtn.disabled=false;
+    } else {
+      if(loginBtn) loginBtn.style.display='block';
+      if(sendBtn) sendBtn.disabled=true;
+    }
+  });
+
+  window.logout = () => signOut(auth).then(()=>console.log("Logged out"));
+</script>
+
+<script>
+var isLoading=false;
+var chatHistory=[];
+var currentChat={id:null,messages:[]};
+var chatCounter=1;
+
+function addMessage(type,content){
+    if(!currentChat.messages)currentChat.messages=[];
+    currentChat.messages.push({type:type,msg:content});
+    var welcome=document.getElementById('welcomeScreen');
+    if(welcome)welcome.remove();
+    var c=document.getElementById('messagesContainer');
+    var msg=document.createElement('div');
+    msg.className='message '+type;
+    var contentDiv=document.createElement('div');
+    contentDiv.className='message-content';
+    contentDiv.textContent=content;
+    msg.appendChild(contentDiv);
+    c.appendChild(msg);
+    scrollToBottom();
+}
+
+function addLoadingMessage(){
+    var c=document.getElementById('messagesContainer');
+    var msg=document.createElement('div');
+    msg.className='message ai';
+    msg.id='loadingMessage';
+    msg.innerHTML =
+      '<div class="message-content loading-card">' +
+        '<div class="loading-inner">' +
+          '<div class="loading-logo-wrap">' +
+            '<img src="https://ik.imagekit.io/pgus2c0zx/LogoNoBackground.png" alt="Loading logo">' +
+          '</div>' +
+          '<span class="loading-text">Working on your query...</span>' +
+        '</div>' +
+      '</div>';
+    c.appendChild(msg);
+    scrollToBottom();
+}
+
+function removeLoadingMessage(){ 
+    var l=document.getElementById('loadingMessage'); 
+    if(l)l.remove(); 
+}
+
+function scrollToBottom(){
+    var container=document.getElementById('messagesContainer');
+    var area=document.getElementById('messagesArea');
+    if(container && container.lastElementChild){
+        container.lastElementChild.scrollIntoView({behavior:'smooth', block:'center'});
+    }
+    if(area){
+        area.scrollTo({ top: area.scrollHeight, behavior:'smooth' });
+    }
+}
+
+function sendMessage(){
+    if(isLoading)return;
+    var input=document.getElementById('inputField');
+    var msg=input.value.trim();
+    if(!msg)return;
+    
+    addMessage('user',msg);
+    input.value='';
+    isLoading=true;
+    sendBtn.disabled=true;
+    addLoadingMessage();
+    
+   fetch('https://hook.eu2.make.com/5xphrd7k2z9ngmi1vijlfpxy02me5u3t',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({message:msg})
+})
+.then(async (response) => {
+
+    // If server returns non-200 (like 500)
+    if (!response.ok) {
+        throw new Error("Server error");
+    }
+
+    const text = await response.text();
+
+    // If Make still sends failure text
+    if (text.includes("Scenario failed to complete")) {
+        throw new Error("Make failure");
+    }
+
+    return text;
+})
+.then(data => {
+    removeLoadingMessage();
+    addMessage('ai', data);
+})
+.catch(error => {
+    removeLoadingMessage();
+
+    addMessage('ai',
+        "⚠️ Servers are currently experiencing issues. Please try again after some time."
+    );
+
+})
+.finally(() => {
+    isLoading = false;
+    sendBtn.disabled = false;
+});
+}
+
+function sendPrompt(text){ 
+    document.getElementById('inputField').value=text; 
+    sendMessage(); 
+}
+
+function newChat(){
+    if(currentChat.messages.length>0){
+        var saved={id:chatCounter,messages:currentChat.messages.slice()};
+        chatHistory.push(saved);
+        addChatToSidebar(saved);
+        chatCounter++;
+    }
+    currentChat={id:null,messages:[]};
+    document.getElementById('messagesContainer').innerHTML =
+      '<div class="welcome-screen" id="welcomeScreen">' +
+        '<h2>Welcome to CogniLink AI</h2>' +
+        '<p class="subtitle">How can I assist you today?</p>' +
+        '<div class="info-box">' +
+          '<div class="info-icon">ℹ️</div>' +
+          '<div class="info-text">Currently running entirely on free/open AI models (Llama, Cohere, ByteDance) for research purposes. Premium models will be added soon.</div>' +
+        '</div>' +
+      '</div>';
+    document.getElementById('inputField').value='';
+    scrollToBottom();
+}
+
+function addChatToSidebar(chat){
+    var side=document.getElementById('recentChats');
+    var div=document.createElement('div');
+    div.className='chat-item';
+    div.textContent='Chat-'+chat.id;
+    div.onclick=function(){loadChat(chat.id)};
+    side.appendChild(div);
+}
+
+function loadChat(id){
+    var chat=chatHistory.find(c=>c.id===id);
+    if(!chat)return;
+    currentChat={id:chat.id,messages:chat.messages.slice()};
+    var c=document.getElementById('messagesContainer'); 
+    c.innerHTML='';
+    currentChat.messages.forEach(m=>addMessage(m.type,m.msg));
+}
+
+var sendBtn=document.getElementById('sendBtn');
+document.getElementById('sendBtn').addEventListener('click',sendMessage);
+document.getElementById('newChatBtn').addEventListener('click',newChat);
+document.getElementById('inputField').addEventListener('keypress',function(e){
+    if(e.key==='Enter'&&!e.shiftKey){ 
+        e.preventDefault(); 
+        sendMessage(); 
+    }
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const inputField = document.getElementById('inputField');
+  const loginNoticePopup = document.getElementById('loginNoticePopup');
+  const noticeOkBtn = document.getElementById('noticeOkBtn');
+  const inputContainer = document.querySelector('.input-container');
+
+  if (!inputField) { 
+    console.error("inputField not found"); 
+    return; 
+  }
+
+  if (inputContainer) {
+    inputContainer.addEventListener('click', (e) => {
+      if (e.target && e.target.id === 'sendBtn') return;
+      inputField.focus();
+    });
+  }
+
+  let noticeShown = false;
+
+  inputField.addEventListener('focus', () => {
+    if (!window.isLoggedIn && !noticeShown) {
+      loginNoticePopup.style.display = 'flex';
+      inputField.blur();
+      noticeShown = true;
+    }
+  });
+
+  noticeOkBtn.addEventListener('click', () => {
+    loginNoticePopup.style.display = 'none';
+    inputField.focus();
+  });
+});
+</script>
+
+</body>
+</html>
