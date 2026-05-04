@@ -988,7 +988,11 @@ function addMessage(type, content) {
   body.className = 'msg-body';
   var bubble = document.createElement('div');
   bubble.className = 'msg-bubble';
+  if (type === 'ai' && content.startsWith('https://image.pollinations.ai')) {
+  bubble.innerHTML = `<img src="${content}" style="max-width:100%;border-radius:8px;margin-top:4px;" />`;
+} else {
   bubble.textContent = content;
+}
   body.appendChild(bubble);
 
   msgEl.appendChild(avatar);
