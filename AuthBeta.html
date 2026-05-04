@@ -1222,8 +1222,10 @@ var loginModal = document.getElementById('loginModal');
 
 function enforceLoginGate() {
   if (!window.isLoggedIn) {
+    loginModal.dataset.justOpened = 'true';
     loginModal.classList.add('open');
     inputField.blur();
+    setTimeout(() => { loginModal.dataset.justOpened = 'false'; }, 400);
   }
 }
 
@@ -1240,8 +1242,12 @@ document.getElementById('sendBtn').addEventListener('mousedown', (e) => {
 document.getElementById('modalOkBtn').addEventListener('click', () => {
   loginModal.classList.remove('open');
 });
+
+// Delay closing so the opening tap doesn't immediately close it on mobile
 loginModal.addEventListener('click', e => {
-  if (e.target === loginModal) loginModal.classList.remove('open');
+  if (e.target === loginModal && loginModal.dataset.justOpened !== 'true') {
+    loginModal.classList.remove('open');
+  }
 });
 </script>
 
