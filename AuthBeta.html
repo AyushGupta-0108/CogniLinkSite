@@ -988,21 +988,97 @@ function addMessage(type, content) {
   body.className = 'msg-body';
   var bubble = document.createElement('div');
   bubble.className = 'msg-bubble';
-const trimmed = content.trim();
-if (type === 'ai' && trimmed.includes('pollinations.ai')) {
-  const img = document.createElement('img');
-  img.src = trimmed;
-  img.style.cssText = 'max-width:100%;border-radius:8px;margin-top:4px;display:block;';
-  bubble.appendChild(img);
-} else {
-  bubble.textContent = content;
-}
-  body.appendChild(bubble);
 
+  if (type === 'ai') {
+    renderContent(bubble, content.trim());
+  } else {
+    bubble.textContent = content;
+  }
+
+  body.appendChild(bubble);
   msgEl.appendChild(avatar);
   msgEl.appendChild(body);
   container.appendChild(msgEl);
   scrollBottom();
+}
+
+function renderContent(bubble, content) {
+  const lines = content.split('\n');
+  let i = 0;
+
+  while (i < lines.length) {
+    const line = lines[i].trim();
+
+    // ── Standalone image URL ──
+    if (line.includes('pollinations.ai')) {
+      const img = document.createElement('img');
+      img.src = line;
+      img.style.cssText = 'max-width:100%;border-radius:8px;margin:6px 0;display:block;';
+      img.onerror = () => { img.replaceWith(makeText('⚠️ Image failed to load.')); };
+      bubble.appendChild(img);
+      i++;
+
+    // ── Code / Image block (||Task|| ... ||Solution||) ──
+    } else if (line === '||Task||') {
+      i++;
+      let taskLines = [];
+      while (i < lines.length && lines[i].trim() !== '||Solution||') {
+        taskLines.push(lines[i]);
+        i++;
+      }
+      i++; // skip ||Solution||
+      let solLines = [];
+      while (i < lines.length && lines[i].trim() !== '' && !lines[i].includes('||')) {
+        solLines.push(lines[i]);
+        i++;
+      }
+
+      // Task label
+      if (taskLines.length > 0) {
+        const label = document.createElement('div');
+        label.style.cssText = 'font-size:0.72rem;color:#64748b;margin:6px 0 2px;letter-spacing:0.05em;text-transform:uppercase;';
+        label.textContent = '📋 Task: ' + taskLines.join(' ').trim();
+        bubble.appendChild(label);
+      }
+
+      // Solution — image or code
+      if (solLines.length > 0) {
+        const sol = solLines.join('\n').trim();
+        if (sol.includes('pollinations.ai')) {
+          const img = document.createElement('img');
+          img.src = sol;
+          img.style.cssText = 'max-width:100%;border-radius:8px;margin:4px 0 8px;display:block;';
+          img.onerror = () => { img.replaceWith(makeText('⚠️ Image failed to load.')); };
+          bubble.appendChild(img);
+        } else {
+          const pre = document.createElement('pre');
+          pre.style.cssText = 'background:#0a0f1e;border:1px solid rgba(59,130,246,0.2);border-radius:8px;padding:0.75rem 1rem;overflow-x:auto;font-family:"DM Mono",monospace;font-size:0.8rem;color:#93c5fd;margin:4px 0 8px;white-space:pre-wrap;word-break:break-word;';
+          const code = document.createElement('code');
+          code.textContent = sol;
+          pre.appendChild(code);
+          bubble.appendChild(pre);
+        }
+      }
+
+    // ── Plain text ──
+    } else {
+      if (line !== '') {
+        bubble.appendChild(makeText(line));
+      } else {
+        const sp = document.createElement('div');
+        sp.style.height = '4px';
+        bubble.appendChild(sp);
+      }
+      i++;
+    }
+  }
+}
+
+function makeText(str) {
+  const p = document.createElement('p');
+  p.style.cssText = 'margin:2px 0;line-height:1.65;white-space:pre-wrap;word-break:break-word;';
+  p.textContent = str;
+  return p;
 }
 
 function addLoadingMessage() {
