@@ -988,8 +988,12 @@ function addMessage(type, content) {
   body.className = 'msg-body';
   var bubble = document.createElement('div');
   bubble.className = 'msg-bubble';
-  if (type === 'ai' && content.startsWith('https://image.pollinations.ai')) {
-  bubble.innerHTML = `<img src="${content}" style="max-width:100%;border-radius:8px;margin-top:4px;" />`;
+const trimmed = content.trim();
+if (type === 'ai' && trimmed.includes('pollinations.ai')) {
+  const img = document.createElement('img');
+  img.src = trimmed;
+  img.style.cssText = 'max-width:100%;border-radius:8px;margin-top:4px;display:block;';
+  bubble.appendChild(img);
 } else {
   bubble.textContent = content;
 }
