@@ -947,9 +947,12 @@ body::after {
       }
       loginBtn.style.display = 'none';
       sendBtn.disabled = false;
+        document.getElementById('inputField').readOnly = false; // ← add this
+   
     } else {
       loginBtn.style.display = '';
       sendBtn.disabled = true;
+      document.getElementById('inputField').readOnly = true;  // ← add this
     }
   });
 
@@ -1222,33 +1225,25 @@ var loginModal = document.getElementById('loginModal');
 
 function enforceLoginGate() {
   if (!window.isLoggedIn) {
-    loginModal.dataset.justOpened = 'true';
-    loginModal.classList.add('open');
     inputField.blur();
-    setTimeout(() => { loginModal.dataset.justOpened = 'false'; }, 400);
+    inputField.readOnly = true;
+    loginModal.classList.add('open');
   }
 }
 
 inputField.addEventListener('focus', enforceLoginGate);
-inputField.addEventListener('touchstart', enforceLoginGate, { passive: true });
-
-document.getElementById('sendBtn').addEventListener('mousedown', (e) => {
-  if (!window.isLoggedIn) {
-    e.preventDefault();
-    enforceLoginGate();
-  }
-});
 
 document.getElementById('modalOkBtn').addEventListener('click', () => {
   loginModal.classList.remove('open');
 });
 
-// Delay closing so the opening tap doesn't immediately close it on mobile
-loginModal.addEventListener('click', e => {
-  if (e.target === loginModal && loginModal.dataset.justOpened !== 'true') {
-    loginModal.classList.remove('open');
-  }
+// Re-enable input readonly state based on login status
+window.addEventListener('loginStateChange', () => {
+  inputField.readOnly = !window.isLoggedIn;
 });
+
+// Delay closing so the opening tap doesn't immediately close it on mobile
+
 </script>
 
 </body>
