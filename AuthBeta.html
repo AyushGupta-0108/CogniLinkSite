@@ -323,27 +323,32 @@ body::after {
   color: var(--text-muted);
   margin-bottom: 1.6rem;
 }
-.info-card {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.7rem;
-  background: rgba(37,99,235,0.055);
-  border: 1px solid rgba(59,130,246,0.18);
-  border-left: 3px solid #3b82f6;
-  border-radius: var(--radius-md);
-  padding: 0.85rem 1.1rem;
-  max-width: 400px;
-  text-align: left;
-  font-size: 0.82rem;
-  color: var(--text-sub);
-  line-height: 1.6;
+
+/* ─── Know the Rules button ─── */
+.know-rules-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.55rem 1.3rem;
+  background: linear-gradient(135deg, rgba(37,99,235,0.18), rgba(56,189,248,0.12));
+  border: 1px solid rgba(59,130,246,0.38);
+  border-radius: 99px;
+  font-family: 'DM Sans', inherit;
+  font-size: 0.84rem;
+  font-weight: 500;
+  color: #93c5fd;
+  cursor: pointer;
+  transition: var(--transition);
+  letter-spacing: 0.01em;
 }
-.info-card-icon {
-  font-size: 0.9rem;
-  flex-shrink: 0;
-  margin-top: 1px;
-  opacity: 0.85;
+.know-rules-btn:hover {
+  background: linear-gradient(135deg, rgba(37,99,235,0.3), rgba(56,189,248,0.2));
+  border-color: rgba(59,130,246,0.65);
+  color: #bfdbfe;
+  transform: translateY(-1px);
+  box-shadow: 0 5px 18px rgba(37,99,235,0.25);
 }
+.know-rules-btn svg { flex-shrink: 0; }
 
 /* ─── Messages ─── */
 .message {
@@ -412,7 +417,7 @@ body::after {
 .loading-bubble {
   display: inline-flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.5rem;
   padding: 0.75rem 1rem;
   background: rgba(13,21,38,0.9);
   border: 1px solid rgba(59,130,246,0.2);
@@ -420,28 +425,22 @@ body::after {
   border-bottom-left-radius: var(--radius-sm);
   box-shadow: 0 0 0 1px rgba(59,130,246,0.08), 0 0 20px rgba(37,99,235,0.15);
 }
-.loading-logo {
-  width: 1.4rem; height: 1.4rem;
-  border-radius: 50%;
-  overflow: hidden;
-  animation: logoSpin 0.9s linear infinite;
-  flex-shrink: 0;
+.loading-label {
+  font-size: 0.85rem;
+  color: var(--text-sub);
+  letter-spacing: 0.01em;
+  line-height: 1;
 }
-.loading-logo img { width: 100%; height: 100%; object-fit: contain; }
-.loading-dots { display: flex; gap: 4px; align-items: center; }
+.loading-dots { display: inline-flex; gap: 3px; align-items: center; margin-bottom: 1px; }
 .loading-dots span {
-  width: 5px; height: 5px;
+  width: 4px; height: 4px;
   border-radius: 50%;
   background: var(--accent2);
   animation: dotBounce 1.2s ease-in-out infinite;
+  display: inline-block;
 }
 .loading-dots span:nth-child(2) { animation-delay: 0.15s; }
 .loading-dots span:nth-child(3) { animation-delay: 0.3s; }
-.loading-label {
-  font-size: 0.78rem;
-  color: var(--text-muted);
-  letter-spacing: 0.03em;
-}
 
 /* ─── Input Area ─── */
 .input-zone {
@@ -669,7 +668,6 @@ body::after {
   from { opacity: 0; transform: translateY(8px) scale(0.97); }
   to   { opacity: 1; transform: translateY(0) scale(1); }
 }
-@keyframes logoSpin { to { transform: rotate(360deg); } }
 @keyframes dotBounce {
   0%,80%,100% { transform: translateY(0); opacity: 0.4; }
   40%          { transform: translateY(-5px); opacity: 1; }
@@ -735,7 +733,6 @@ body::after {
   .messages-inner { padding-bottom: 1rem; }
   .welcome { padding: 2rem 0.75rem 1.5rem; }
   .welcome h2 { font-size: 1.3rem; }
-  .info-card { max-width: 100%; }
   .msg-body { max-width: 85%; }
 }
 @media (max-width: 460px) {
@@ -793,10 +790,10 @@ body::after {
           </div>
           <h2>Welcome to CogniLink AI</h2>
           <p>Your intelligent orchestration platform — how can I help you today?</p>
-          <div class="info-card">
-            <div class="info-card-icon">ℹ️</div>
-            <div>Currently running on free/open AI models (Llama, Cohere, ByteDance) for research purposes. Premium models coming soon.</div>
-          </div>
+          <button class="know-rules-btn" id="knowRulesBtn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            Know the rules!
+          </button>
         </div>
       </div>
     </div>
@@ -876,13 +873,12 @@ body::after {
       </div>
       <div style="display:flex;gap:0.6rem;align-items:flex-start;font-size:0.83rem;color:#94a3b8;line-height:1.55;">
         <span style="font-size:1rem;flex-shrink:0;">🆓</span>
-        <span><strong style="color:#f1f5f9;">Free models running.</strong> Ask light, simple questions. Avoid heavy or complex tasks.</span>
+        <span><strong style="color:#f1f5f9;">Free models running.</strong> Ask light, simple questions. Avoid heavy or complex tasks. Currently running on free/open AI models (Llama, Cohere, ByteDance) for research purposes. Premium models coming soon.</span>
       </div>
       <div style="display:flex;gap:0.6rem;align-items:flex-start;font-size:0.83rem;color:#94a3b8;line-height:1.55;">
         <span style="font-size:1rem;flex-shrink:0;">🤝</span>
         <span><strong style="color:#f1f5f9;">Use responsibly.</strong> This is a beta research platform. Be respectful and mindful.</span>
       </div>
-
     </div>
     <button class="modal-btn" id="disclaimerOkBtn">I Understand</button>
   </div>
@@ -952,12 +948,11 @@ body::after {
       }
       loginBtn.style.display = 'none';
       sendBtn.disabled = false;
-        document.getElementById('inputField').readOnly = false; // ← add this
-   
+      document.getElementById('inputField').readOnly = false;
     } else {
       loginBtn.style.display = '';
       sendBtn.disabled = true;
-      document.getElementById('inputField').readOnly = true;  // ← add this
+      document.getElementById('inputField').readOnly = true;
     }
   });
 
@@ -1104,9 +1099,8 @@ function addLoadingMessage() {
     '<div class="msg-avatar"><img src="https://ik.imagekit.io/pgus2c0zx/LogoNoBackground.png" alt="AI"></div>' +
     '<div class="msg-body">' +
       '<div class="loading-bubble">' +
-        '<div class="loading-logo"><img src="https://ik.imagekit.io/pgus2c0zx/LogoNoBackground.png" alt=""></div>' +
+        '<span class="loading-label">Working on it</span>' +
         '<div class="loading-dots"><span></span><span></span><span></span></div>' +
-        '<span class="loading-label">Working on it…</span>' +
       '</div>' +
     '</div>';
   container.appendChild(msgEl);
@@ -1186,9 +1180,14 @@ function newChat() {
       '<div class="welcome-orb"><img src="https://ik.imagekit.io/pgus2c0zx/LogoNoBackground.png" alt="CogniLink"></div>' +
       '<h2>Welcome to CogniLink AI</h2>' +
       '<p>Your intelligent orchestration platform — how can I help you today?</p>' +
-      '<div class="info-card"><div class="info-card-icon">ℹ️</div>' +
-      '<div>Currently running on free/open AI models (Llama, Cohere, ByteDance) for research purposes. Premium models coming soon.</div></div>' +
+      '<button class="know-rules-btn" id="knowRulesBtn">' +
+        '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>' +
+        'Know the rules!' +
+      '</button>' +
     '</div>';
+  // Re-attach listener for dynamically created button
+  var btn = document.getElementById('knowRulesBtn');
+  if (btn) btn.addEventListener('click', openDisclaimer);
   document.getElementById('inputField').value = '';
 }
 
@@ -1221,9 +1220,17 @@ inputField.addEventListener('keydown', function(e) {
 
 // ── Disclaimer ──
 var disclaimerModal = document.getElementById('disclaimerModal');
+
+function openDisclaimer() {
+  disclaimerModal.classList.add('open');
+}
+
 document.getElementById('disclaimerOkBtn').addEventListener('click', () => {
   disclaimerModal.classList.remove('open');
 });
+
+// Know the rules button on initial welcome screen
+document.getElementById('knowRulesBtn').addEventListener('click', openDisclaimer);
 
 // ── Login gate ──
 var loginModal = document.getElementById('loginModal');
@@ -1246,9 +1253,6 @@ document.getElementById('modalOkBtn').addEventListener('click', () => {
 window.addEventListener('loginStateChange', () => {
   inputField.readOnly = !window.isLoggedIn;
 });
-
-// Delay closing so the opening tap doesn't immediately close it on mobile
-
 </script>
 
 </body>
