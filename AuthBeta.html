@@ -384,7 +384,18 @@ body::after {
   padding: 3px;
 }
 .msg-avatar img.spinning {
-  animation: logoSpin 1.2s linear infinite;
+  animation: logoSpin 1.8s linear infinite;
+}
+.msg-avatar.spinning-avatar {
+  animation: amoebaPulse 2.4s ease-in-out infinite;
+}
+@keyframes amoebaPulse {
+  0%   { transform: scale(1);    border-radius: 50%;         box-shadow: 0 0 8px rgba(56,189,248,0.25); }
+  20%  { transform: scale(1.13); border-radius: 44% 56% 52% 48%; box-shadow: 0 0 16px rgba(56,189,248,0.45); }
+  40%  { transform: scale(0.94); border-radius: 52% 48% 44% 56%; box-shadow: 0 0 6px rgba(56,189,248,0.18); }
+  60%  { transform: scale(1.1);  border-radius: 48% 52% 56% 44%; box-shadow: 0 0 14px rgba(56,189,248,0.38); }
+  80%  { transform: scale(0.97); border-radius: 55% 45% 50% 50%; box-shadow: 0 0 9px rgba(56,189,248,0.28); }
+  100% { transform: scale(1);    border-radius: 50%;         box-shadow: 0 0 8px rgba(56,189,248,0.25); }
 }
 
 .msg-body {
@@ -1100,7 +1111,7 @@ function addLoadingMessage() {
   msgEl.className = 'message ai';
   msgEl.id = 'loadingMsg';
   msgEl.innerHTML =
-    '<div class="msg-avatar"><img class="spinning" src="https://ik.imagekit.io/pgus2c0zx/LogoNoBackground.png" alt="AI"></div>' +
+    '<div class="msg-avatar spinning-avatar"><img class="spinning" src="https://ik.imagekit.io/pgus2c0zx/LogoNoBackground.png" alt="AI"></div>' +
     '<div class="msg-body">' +
       '<div class="loading-bubble">' +
         '<span class="loading-label">Working on it</span>' +
